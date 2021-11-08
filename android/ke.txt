@@ -1,0 +1,28 @@
+keytool -genkey -v -keystore release.jks -alias key -keyalg RSA -keysize 2048 -validity 10000
+Enter keystore password:  
+Re-enter new password: 
+What is your first and last name?
+  [Unknown]:  Abdulaziz
+What is the name of your organizational unit?
+  [Unknown]:  Ekhtilef
+What is the name of your organization?
+  [Unknown]:  Ekhtilef
+What is the name of your City or Locality?
+  [Unknown]:  Arabia Saudi
+What is the name of your State or Province?
+  [Unknown]:  Riadh
+What is the two-letter country code for this unit?
+  [Unknown]:  RD
+Is CN=Abdulaziz, OU=Ekhtilef, O=Ekhtilef, L=Arabia Saudi, ST=Riadh, C=RD correct?
+  [no]:  yes
+
+Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) with a validity of 10,000 days
+        for: CN=Abdulaziz, OU=Ekhtilef, O=Ekhtilef, L=Arabia Saudi, ST=Riadh, C=RD
+Enter key password for <key>
+        (RETURN if same as keystore password):  
+[Storing release.jks]
+
+Warning:
+The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using "keytool -importkeystore -srckeystore release.jks -destkeystore release.jks -deststoretype pkcs12".
+
+

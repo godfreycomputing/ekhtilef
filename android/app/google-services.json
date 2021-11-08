@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "66183942341",
+    "firebase_url": "https://ekhtilaf-default-rtdb.firebaseio.com",
+    "project_id": "ekhtilaf",
+    "storage_bucket": "ekhtilaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66183942341:android:c96cadd75fbfcfaa9fe0ac",
+        "android_client_info": {
+          "package_name": "com.ekhtilaf.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66183942341-66qblnu3oh9iqch81ss1f7puud813qkf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ekhtilaf.store",
+            "certificate_hash": "a70b994716ac427b4969be3f975ad0013ee423f0"
+          }
+        },
+        {
+          "client_id": "66183942341-sq28r3ukt1uulrfr9afaps8asck3toff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ekhtilaf.store",
+            "certificate_hash": "721d06c8f2fcd8203f89d145f6294df4a720df0d"
+          }
+        },
+        {
+          "client_id": "66183942341-s7qv01qb0dsdstcvpjtf0966o7fpdtmq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoQxyztoELWTi2W0F9Fqw6ZrHCD4X3yxc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66183942341-s7qv01qb0dsdstcvpjtf0966o7fpdtmq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,188 @@
+name: fstore
+publish_to: "none"
+description: Mobile commerce app by Flutter
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 2.5.0+3022
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  inspireui: 1.0.3
+
+  # Base
+  intl: 0.17.0
+  crypto: 3.0.1
+  path_provider: 2.0.3
+  url_launcher: 6.0.2
+  app_tracking_transparency: 2.0.1
+  localstorage: 4.0.0+1
+  http: 0.13.3
+  http_auth: 1.0.1
+  share: ^2.0.4
+
+  # FIREBASE PACKAGES
+  firebase_core: 1.6.0
+  firebase_analytics: 8.3.2
+  firebase_auth: 3.1.1
+  firebase_remote_config: 0.11.0
+  firebase_dynamic_links: 2.0.9
+
+  # realtime chat
+  cloud_firestore: 1.0.7
+  firestore_ui: 1.20.0
+
+
+  # STATE MANAGEMENT
+  provider: 6.0.0
+  get_it: ^7.2.0
+
+  # SPLASH SCREEN, ONBOARD
+  flare_loading: ^3.0.0
+  rive: 0.7.28
+
+  # ICON FONTS
+  cupertino_icons: 1.0.3
+
+  # WEB TOOLS
+  html_unescape: 2.0.0
+  webview_flutter: 2.0.12
+  flutter_widget_from_html: 0.7.0
+  flutter_webview_plugin: 0.4.0
+  responsive_builder: 0.4.1
+  video_player_platform_interface: 4.2.0
+
+  # MAP
+  google_maps_flutter: 2.0.8
+  location: 4.3.0
+  maps_launcher: 2.0.1
+  geocode: 1.0.1
+
+  # AUTHENTICATION
+  the_apple_sign_in: 1.1.1
+  flutter_facebook_auth: 3.5.1
+  google_sign_in: 5.1.0
+  sms_autofill: 2.0.1
+
+  # PUSH NOTIFICATION
+  firebase_messaging: 10.0.7
+  notification_permissions: 0.5.0
+  onesignal_flutter: 3.2.3
+
+  # FILES, IMAGES
+  file_picker: 4.0.2
+  cached_network_image: 3.1.0
+  image: 3.0.2
+  transparent_image: 2.0.0
+  extended_image: 4.2.1
+  image_picker: 0.8.4
+  flutter_native_image: 0.0.6+1
+  multi_image_picker2: 5.0.2
+
+  # ADS
+  google_mobile_ads: 0.13.4
+  facebook_audience_network: 1.0.0-nullsafety.0
+
+  # TOOLS
+  google_fonts: 2.1.0
+  random_string: 2.3.1
+  json_annotation: 4.0.1
+  timeago: 3.1.0
+  universal_platform: 1.0.0+1
+  uuid: 3.0.4
+  easy_debounce: 2.0.1
+  devicelocale: 0.4.2
+  collection: 1.15.0
+  visibility_detector: 0.2.0
+  rate_my_app: 1.1.1
+  package_info: 2.0.2
+  enum_to_string: ^2.0.1
+
+  # UI
+  auto_size_text: 3.0.0-nullsafety.0
+  flutter_spinkit: 5.1.0
+  smooth_page_indicator: 1.0.0+2
+  animated_text_kit: 4.2.1
+  animations: 2.0.1
+  flash: 2.0.1
+  flutter_staggered_grid_view: 0.4.0
+  flutter_statusbarcolor_ns: 0.3.0-nullsafety
+  flutter_swiper_null_safety: 1.0.2
+  pull_to_refresh: 2.0.0
+  implicitly_animated_reorderable_list: 0.4.1
+  rubber: ^1.0.1
+  pin_code_fields: 7.3.0
+  country_code_picker: 2.0.2
+  country_pickers: 2.0.0
+  intro_slider: ^3.0.2
+  #audio_manager: ^0.8.1
+  flutter_calendar_carousel: 2.0.3
+
+  charts_flutter:
+    git:
+      url: git://github.com/google/charts.git
+      path: charts_flutter
+  razorpay_flutter:
+    git: https://github.com/inspireui/razorpay-flutter.git
+
+
+dev_dependencies:
+  flutter_launcher_icons: 0.9.2
+  flutter_lints: ^1.0.4
+
+## Enable to use Flutter Test Driver
+#  flutter_driver:
+#    sdk: flutter
+#  test: 1.16.5
+#  dependency_validator: 3.1.0
+
+## Enable To run json serializer, run:
+## flutter pub run build_runner build --build-filter="lib/models/serializers/*.dart" --delete-conflicting-outputs
+## flutter pub run build_runner serve --build-filter="lib/models/serializers/*.dart"
+#  build_runner: 2.0.3
+#  json_serializable: 4.1.2
+
+#  Run this script to generate the app icon: flutter pub run flutter_launcher_icons:main
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon.png"
+
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/config/
+    - lib/config/mocks/
+    - lib/config/states/
+    - lib/config/stories/
+    - assets/icons/credit_cards/
+    - assets/icons/tabs/
+    - assets/icons/payment/
+    - assets/icons/logins/
+    - assets/images/
+    - assets/images/country/
+    - assets/images/favicon/
+    - assets/html/
+    - google_fonts/
+
+flutter_intl:
+  enabled: true
+  use_deferred_loading: true
