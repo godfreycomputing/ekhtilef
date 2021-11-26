@@ -183,6 +183,7 @@ class _SimpleLayoutState extends State<SimpleLayout>
                           const SizedBox(
                             height: 2,
                           ),
+                          //HLOPA1
                           ProductGallery(
                             product: product,
                             onSelect: (String url, bool isVideo) {
@@ -213,7 +214,7 @@ class _SimpleLayoutState extends State<SimpleLayout>
                         ],
                       ),
                     ),
-                    renderProductInfo(),
+                    //renderProductInfo(),
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -238,7 +239,7 @@ class _SimpleLayoutState extends State<SimpleLayout>
                                 ],
                               ),
                             ),
-                            RelatedProduct(product),
+                            //RelatedProduct(product),
                           ],
                         ),
                       ),

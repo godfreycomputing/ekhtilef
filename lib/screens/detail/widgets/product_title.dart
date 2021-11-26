@@ -125,90 +125,90 @@ class _ProductTitleState extends BaseScreen<ProductTitle> {
           children: [
             Flexible(
               child: Text(
-                widget.product!.name!,
+                widget.product!.name! + "hloptitle",
                 style: Theme.of(context)
                     .textTheme
                     .headline5!
                     .apply(fontSizeFactor: 0.9),
               ),
             ),
-            if (isSaleOff)
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 5,
-                  vertical: 2,
-                ),
-                margin: const EdgeInsets.only(left: 4, top: 4),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Text(
-                  S.of(context).sale('$sale'),
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        color: Colors.white,
-                        letterSpacing: 1,
-                        fontWeight: FontWeight.w500,
-                      ),
-                ),
-              ),
+            // if (isSaleOff)
+            //   Container(
+            //     padding: const EdgeInsets.symmetric(
+            //       horizontal: 5,
+            //       vertical: 2,
+            //     ),
+            //     margin: const EdgeInsets.only(left: 4, top: 4),
+            //     decoration: BoxDecoration(
+            //       color: Colors.red,
+            //       borderRadius: BorderRadius.circular(5),
+            //     ),
+            //     child: Text(
+            //       S.of(context).sale('$sale'),
+            //       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+            //             color: Colors.white,
+            //             letterSpacing: 1,
+            //             fontWeight: FontWeight.w500,
+            //           ),
+            //     ),
+            //   ),
           ],
         ),
-        const SizedBox(height: 10),
-        Row(
-          children: <Widget>[
-            Services()
-                .widget
-                .renderDetailPrice(context, widget.product!, price),
+        // const SizedBox(height: 10),
+        // Row(
+        //   children: <Widget>[
+        //     Services()
+        //         .widget
+        //         .renderDetailPrice(context, widget.product!, price),
 
-            /// For variable product, hide regular price when loading product variation.
-            if (isSaleOff)
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedBox(width: 5),
-                    Text(
-                      PriceTools.getCurrencyFormatted(
-                        regularPrice,
-                        currencyRate,
-                        currency: currency,
-                      )!,
-                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .secondary
-                                .withOpacity(0.6),
-                            fontWeight: FontWeight.w400,
-                            decoration: TextDecoration.lineThrough,
-                          ),
-                    ),
-                    const SizedBox(width: 10),
-                    if (isShowCountDown) ...[
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: Text(
-                          S.of(context).endsIn('').toUpperCase(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(
-                                color: theme.colorScheme.secondary
-                                    .withOpacity(0.9),
-                              )
-                              .apply(fontSizeFactor: 0.6),
-                        ),
-                      ),
-                      CountDownTimer(
-                        Duration(milliseconds: countDown),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-          ],
-        ),
+        //     /// For variable product, hide regular price when loading product variation.
+        //     if (isSaleOff)
+        //       Expanded(
+        //         child: Row(
+        //           crossAxisAlignment: CrossAxisAlignment.center,
+        //           children: <Widget>[
+        //             const SizedBox(width: 5),
+        //             Text(
+        //               PriceTools.getCurrencyFormatted(
+        //                 regularPrice,
+        //                 currencyRate,
+        //                 currency: currency,
+        //               )!,
+        //               style: Theme.of(context).textTheme.subtitle1!.copyWith(
+        //                     color: Theme.of(context)
+        //                         .colorScheme
+        //                         .secondary
+        //                         .withOpacity(0.6),
+        //                     fontWeight: FontWeight.w400,
+        //                     decoration: TextDecoration.lineThrough,
+        //                   ),
+        //             ),
+        //             const SizedBox(width: 10),
+        //             if (isShowCountDown) ...[
+        //               const Spacer(),
+        //               Padding(
+        //                 padding: const EdgeInsets.only(left: 4.0),
+        //                 child: Text(
+        //                   S.of(context).endsIn('').toUpperCase(),
+        //                   style: Theme.of(context)
+        //                       .textTheme
+        //                       .subtitle1!
+        //                       .copyWith(
+        //                         color: theme.colorScheme.secondary
+        //                             .withOpacity(0.9),
+        //                       )
+        //                       .apply(fontSizeFactor: 0.6),
+        //                 ),
+        //               ),
+        //               CountDownTimer(
+        //                 Duration(milliseconds: countDown),
+        //               ),
+        //             ],
+        //           ],
+        //         ),
+        //       ),
+        //   ],
+        // ),
         Row(
           textBaseline: TextBaseline.alphabetic,
           crossAxisAlignment: CrossAxisAlignment.baseline,

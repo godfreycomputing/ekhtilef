@@ -183,6 +183,13 @@ flutter:
     - assets/html/
     - google_fonts/
 
+  fonts:
+    - family: Arb
+      fonts:
+        - asset: assets/fonts/arb-medium.ttf
+        - asset: assets/fonts/arb-bold.ttf
+        - asset: assets/fonts/arb-light.ttf
+    
 flutter_intl:
   enabled: true
   use_deferred_loading: true

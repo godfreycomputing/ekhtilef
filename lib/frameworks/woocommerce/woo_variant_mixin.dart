@@ -251,7 +251,7 @@ mixin WooVariantMixin on ProductVariantMixin {
         context, productVariation, product, isAvailable);
   }
 
-  List<Widget> getBuyButtonWidget(
+  Widget getBuyButtonWidget(
     BuildContext context,
     ProductVariation? productVariation,
     Product product,

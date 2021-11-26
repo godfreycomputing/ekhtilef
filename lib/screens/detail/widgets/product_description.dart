@@ -30,7 +30,7 @@ class ProductDescription extends StatelessWidget {
         const SizedBox(height: 15),
         if (product!.description != null && product!.description!.isNotEmpty)
           ExpansionInfo(
-            title: S.of(context).description,
+            title: S.of(context).description +"HLOPPA",
             expand: true,
             children: <Widget>[
               const SizedBox(height: 10),
@@ -70,16 +70,16 @@ class ProductDescription extends StatelessWidget {
               ),
             ],
           ),
-        if (product!.infors.isNotEmpty)
-          ExpansionInfo(
-            expand: true,
-            title: S.of(context).additionalInformation,
-            children: <Widget>[
-              AdditionalInformation(
-                listInfo: product!.infors,
-              ),
-            ],
-          ),
+        // if (product!.infors.isNotEmpty)
+        //   ExpansionInfo(
+        //     expand: true,
+        //     title: S.of(context).additionalInformation,
+        //     children: <Widget>[
+        //       AdditionalInformation(
+        //         listInfo: product!.infors,
+        //       ),
+        //     ],
+        //   ),
       ],
     );
   }

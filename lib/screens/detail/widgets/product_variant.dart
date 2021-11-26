@@ -20,10 +20,12 @@ import '../../../services/index.dart';
 import '../../../widgets/common/webview.dart';
 
 class ProductVariant extends StatefulWidget {
+  
   final Product? product;
   final Function? onSelectVariantImage;
 
   const ProductVariant(
+    
     this.product, {
     this.onSelectVariantImage,
   });
@@ -239,7 +241,7 @@ class _StateProductVariant extends State<ProductVariant> {
     );
   }
 
-  List<Widget> getBuyButtonWidget() {
+  Widget getBuyButtonWidget() {
     return services.widget.getBuyButtonWidget(context, productVariation,
         product, mapAttribute, getMaxQuantity(), quantity, addToCart, (val) {
       setState(() {
@@ -259,14 +261,15 @@ class _StateProductVariant extends State<ProductVariant> {
     final isVariationLoading = productVariation == null &&
         (variations?.isEmpty ?? true) &&
         Config().type != ConfigType.opencart;
-
-    return Column(
-      children: <Widget>[
-        ...getProductTitleWidget(),
-        if (!isVariationLoading) ...getProductAttributeWidget(),
-        ...getProductAddonsWidget(),
-        ...getBuyButtonWidget(),
-      ],
-    );
+    return  getBuyButtonWidget();
+    // return Column(
+    //   children: <Widget>[
+    //     ...getProductTitleWidget(),
+    //     if (!isVariationLoading) ...getProductAttributeWidget(),
+    //     ...getProductAddonsWidget(),
+    //     Align(alignment: Alignment.center ,child:
+    //      getBuyButtonWidget(),)
+    //   ],
+    // );
   }
 }

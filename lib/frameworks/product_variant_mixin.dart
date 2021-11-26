@@ -146,7 +146,7 @@ mixin ProductVariantMixin {
           children: <Widget>[
             if (kAdvanceConfig['showStockStatus']) ...[
               Text(
-                '${S.of(context).availability}: ',
+                '${S.of(context).availability}:hlop ',
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               // ignore: unnecessary_null_comparison
@@ -173,20 +173,29 @@ mixin ProductVariantMixin {
           ],
         ),
       );
-
       if (product.shortDescription != null &&
           product.shortDescription!.isNotEmpty) {
         listWidget.add(
           Container(
-            margin: const EdgeInsets.only(top: 15),
+            //margin: const EdgeInsets.all(10),
             padding: const EdgeInsets.symmetric(
               vertical: 10,
               horizontal: 8,
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColorLight.withOpacity(0.7),
-              borderRadius: BorderRadius.circular(6),
-            ),
+                color: Colors.grey.withOpacity(
+                    .7), //Theme.of(context).primaryColorLight.withOpacity(0.7),
+                //borderRadius: BorderRadius.circular(6),
+
+                border: const Border(
+                    bottom: BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                        style: BorderStyle.solid),
+                    top: BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                        style: BorderStyle.solid))),
             child: html.HtmlWidget(
               product.shortDescription!,
             ),
@@ -202,7 +211,7 @@ mixin ProductVariantMixin {
     return listWidget;
   }
 
-  List<Widget> makeBuyButtonWidget(
+  Widget makeBuyButtonWidget(
     BuildContext context,
     ProductVariation? productVariation,
     Product product,
@@ -229,15 +238,18 @@ mixin ProductVariantMixin {
 
     final buyOrOutOfStockButton = Container(
       height: 44,
+      width: MediaQuery.of(context).size.width * .7,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(3),
-        color: isExternal
-            ? (inStock &&
-                    (product.attributes!.length == mapAttribute!.length) &&
-                    isAvailable)
-                ? theme.primaryColor
-                : theme.disabledColor
-            : theme.primaryColor,
+        
+        borderRadius: BorderRadius.circular(50),
+        color: const Color(0xFF01BBD3)
+        // isExternal
+        //     ? (inStock &&
+        //             (product.attributes!.length == mapAttribute!.length) &&
+        //             isAvailable)
+        //         ? theme.primaryColor
+        //         : theme.disabledColor
+        //     : theme.primaryColor,
       ),
       child: Center(
         child: Text(
@@ -249,114 +261,104 @@ mixin ProductVariantMixin {
                           ? S.of(context).loading
                           : S.of(context).unavailable)
                   .toUpperCase()),
-          style: Theme.of(context).textTheme.button!.copyWith(
-                color: Colors.white,
-              ),
+          style: const TextStyle(fontWeight: FontWeight.w700, color: Colors.white, fontSize: 20) 
         ),
       ),
     );
 
     if (!inStock && !isExternal && !product.backOrdered) {
-      return [
-        buyOrOutOfStockButton,
-      ];
+      return buyOrOutOfStockButton;
     }
 
     if ((product.isPurchased) && (product.isDownloadable ?? false)) {
-      return [
-        Row(
-          children: [
-            Expanded(
-              child: InkWell(
-                onTap: () async => await Share.share(product.files![0]!),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: theme.primaryColor,
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Center(
-                      child: Text(
-                    S.of(context).download,
-                    style: Theme.of(context).textTheme.button!.copyWith(
-                          color: Colors.white,
-                        ),
-                  )),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ];
-    }
-
-    return [
-      if (!isExternal && (kProductDetail.showStockQuantity)) ...[
-        const SizedBox(width: 10),
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                S.of(context).selectTheQuantity + ':',
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                height: 32.0,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                ),
-                child: QuantitySelection(
-                  height: 32.0,
-                  expanded: true,
-                  value: quantity,
-                  color: theme.colorScheme.secondary,
-                  limitSelectQuantity: maxQuantity,
-                  onChanged: onChangeQuantity,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-      const SizedBox(height: 10),
-      Row(
-        children: <Widget>[
+      return Row(
+        children: [
           Expanded(
-            child: GestureDetector(
-              onTap: isAvailable ? () => addToCart(true, inStock) : null,
-              child: buyOrOutOfStockButton,
+            child: InkWell(
+              onTap: () async => await Share.share(product.files![0]!),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: theme.primaryColor,
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Center(
+                    child: Text(
+                  S.of(context).download,
+                  style: Theme.of(context).textTheme.button!.copyWith(
+                        color: Colors.white,
+                      ),
+                )),
+              ),
             ),
           ),
-          const SizedBox(width: 10),
-          if (isAvailable && inStock && !isExternal)
-            Expanded(
-              child: GestureDetector(
-                onTap: () => addToCart(false, inStock),
-                child: Container(
-                  height: 44,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    color: Theme.of(context).primaryColorLight,
-                  ),
-                  child: Center(
-                    child: Text(
-                      S.of(context).addToCart.toUpperCase(),
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
         ],
-      )
-    ];
+      );
+    }
+
+    return
+        // if (!isExternal && (kProductDetail.showStockQuantity)) ...[
+        //   const SizedBox(width: 10),
+        //   Row(
+        //     children: [
+        //       // Expanded(
+        //       //   child: Text(
+        //       //     S.of(context).selectTheQuantity + ':',
+        //       //     style: Theme.of(context).textTheme.subtitle1,
+        //       //   ),
+        //       // ),
+        //       Expanded(
+        //         child: Container(
+        //           height: 32.0,
+        //           alignment: Alignment.center,
+        //           decoration: BoxDecoration(
+        //             borderRadius: BorderRadius.circular(3),
+        //           ),
+        //           child: QuantitySelection(
+        //             height: 32.0,
+        //             expanded: true,
+        //             value: quantity,
+        //             color: theme.colorScheme.secondary,
+        //             limitSelectQuantity: maxQuantity,
+        //             onChanged: onChangeQuantity,
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ],
+        Row(children: <Widget>[
+      Expanded(
+        child: GestureDetector(
+          onTap: isAvailable ? () => addToCart(true, inStock) : null,
+          child: buyOrOutOfStockButton,
+        ),
+      ),
+      // const SizedBox(width: 10),
+      // if (isAvailable && inStock && !isExternal)
+      //   Expanded(
+      //     child: GestureDetector(
+      //       onTap: () => addToCart(false, inStock),
+      //       child: Container(
+      //         height: 44,
+      //         decoration: BoxDecoration(
+      //           borderRadius: BorderRadius.circular(3),
+      //           color: Theme.of(context).primaryColorLight,
+      //         ),
+      //         child: Center(
+      //           child: Text(
+      //             S.of(context).addToCart.toUpperCase(),
+      //             style: TextStyle(
+      //               color: Theme.of(context).colorScheme.secondary,
+      //               fontWeight: FontWeight.bold,
+      //               fontSize: 12,
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+    ]);
   }
 
   /// Add to Cart & Buy Now function

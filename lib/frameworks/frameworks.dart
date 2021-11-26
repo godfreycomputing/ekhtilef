@@ -186,7 +186,7 @@ abstract class BaseFrameworks {
   ) =>
       [const SizedBox()];
 
-  List<Widget> getBuyButtonWidget(
+  Widget getBuyButtonWidget(
     BuildContext context,
     ProductVariation? productVariation,
     Product product,
@@ -197,7 +197,7 @@ abstract class BaseFrameworks {
     Function onChangeQuantity,
     List<ProductVariation>? variations,
   ) =>
-      [const SizedBox()];
+      const SizedBox();
 
   void addToCart(BuildContext context, Product product, int quantity,
       ProductVariation? productVariation, Map<String?, String?> mapAttribute,

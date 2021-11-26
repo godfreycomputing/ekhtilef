@@ -28,7 +28,7 @@ class ImageFeature extends StatelessWidget {
         }),
       );
     }
-
+      print("$imageFeature ---------------- hlopaimage");
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return FlexibleSpaceBar(
