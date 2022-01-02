@@ -221,7 +221,8 @@ class MainTabsState extends CustomOverlayState<MainTabs>
       drawerEnableOpenDragGesture: false,
       resizeToAvoidBottomInset: false,
       backgroundColor: showFloating ? null : Theme.of(context).backgroundColor,
-      body: CupertinoTheme(
+      body: 
+      CupertinoTheme(
         data: CupertinoThemeData(
           primaryColor: Theme.of(context).colorScheme.secondary,
           barBackgroundColor: Theme.of(context).backgroundColor,
@@ -274,7 +275,7 @@ class MainTabsState extends CustomOverlayState<MainTabs>
         ),
       ),
       drawer: isDesktopDisplay ? null : const Drawer(child: SideBarMenu()),
-      bottomNavigationBar: showFloating
+      /** navigation bottom*/bottomNavigationBar: showFloating
           ? BottomAppBar(
               shape: isClip ? const CircularNotchedRectangle() : null,
               child: tabBarMenu(),

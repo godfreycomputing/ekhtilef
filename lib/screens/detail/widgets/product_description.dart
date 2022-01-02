@@ -29,10 +29,10 @@ class ProductDescription extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 15),
         if (product!.description != null && product!.description!.isNotEmpty)
-          ExpansionInfo(
-            title: S.of(context).description +"HLOPPA",
-            expand: true,
+          Column(  
+            
             children: <Widget>[
+              Align(alignment: Alignment.centerLeft,child:Text(S.of(context).description),),
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),

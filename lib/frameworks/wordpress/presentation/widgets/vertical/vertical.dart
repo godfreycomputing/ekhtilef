@@ -36,7 +36,7 @@ class _VerticalLayoutState extends State<VerticalLayout> {
       children: <Widget>[
         if (widget.config['name'] != null)
           HeaderView(
-            headerText: widget.config['name'] ?? '',
+            headerText: widget.config['name']  ?? '',
             showSeeAll: true,
             callback: () => FluxNavigate.pushNamed(
               RouteList.backdrop,

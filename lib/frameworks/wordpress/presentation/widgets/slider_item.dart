@@ -63,7 +63,7 @@ class _SliderItemState extends State<SliderItem> {
           return Column(
             children: <Widget>[
               HeaderView(
-                headerText: widget.config!['name'] ?? ' ',
+                headerText: widget.config!['name']  ?? ' ',
                 showSeeAll: isRecent ? false : true,
                 callback: () => FluxNavigate.pushNamed(
                   RouteList.backdrop,
@@ -81,7 +81,7 @@ class _SliderItemState extends State<SliderItem> {
         return Column(
           children: <Widget>[
             HeaderView(
-              headerText: widget.config!['name'] ?? ' ',
+              headerText: widget.config!['name']  ?? ' ',
               showSeeAll: isRecent ? false : true,
               callback: () => FluxNavigate.pushNamed(
                 RouteList.backdrop,

@@ -94,4 +94,8 @@ class RouteList {
   static const String memberShipUltimatePlans = 'memberShipUltimatePlans';
   static const String memberShipUltimateSignUp = 'memberShipUltimateSignUp';
   static const String memberShipUltimateBankInfo = 'memberShipUltimateBankInfo';
+
+  /// Custom
+  static const String tshirt = 'tshirt';
+
 }

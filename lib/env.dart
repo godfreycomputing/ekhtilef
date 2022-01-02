@@ -221,13 +221,13 @@ Map<String, dynamic> environment = {
       "text": "English",
       "storeViewCode": ""
     },
-    {
-      "name": "French",
-      "icon": "assets/images/country/fr.png",
-      "code": "fr",
-      "text": "French",
-      "storeViewCode": "fr"
-    },
+    // {
+    //   "name": "French",
+    //   "icon": "assets/images/country/fr.png",
+    //   "code": "fr",
+    //   "text": "French",
+    //   "storeViewCode": "fr"
+    // },
     {
       "name": "Arabic",
       "icon": "assets/images/country/ar.png",
@@ -235,13 +235,13 @@ Map<String, dynamic> environment = {
       "text": "Arabic",
       "storeViewCode": "ar"
     },
-    {
-      "name": "Turkish",
-      "icon": "assets/images/country/tr.png",
-      "code": "tr",
-      "text": "Turkish",
-      "storeViewCode": "tr"
-    },
+    // {
+    //   "name": "Turkish",
+    //   "icon": "assets/images/country/tr.png",
+    //   "code": "tr",
+    //   "text": "Turkish",
+    //   "storeViewCode": "tr"
+    // },
     
   ],
   "unsupportedLanguages": ["ku"],

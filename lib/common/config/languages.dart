@@ -24,7 +24,7 @@ String getLanguageByContext(BuildContext context, String code) {
     case 'zh':
       return S.of(context).chinese;
     case 'hi':
-      return S.of(context).India;
+      return S.of(context).india;
     case 'es':
       return S.of(context).spanish;
     case 'fr':
@@ -38,7 +38,7 @@ String getLanguageByContext(BuildContext context, String code) {
     case 'ja':
       return S.of(context).japanese;
     case 'ko':
-      return S.of(context).Korean;
+      return S.of(context).korean;
     case 'vi':
       return S.of(context).vietnamese;
     case 'ro':
@@ -58,15 +58,15 @@ String getLanguageByContext(BuildContext context, String code) {
     case 'th':
       return S.of(context).thailand;
     case 'nl':
-      return S.of(context).Dutch;
+      return S.of(context).dutch;
     case 'sr':
       return S.of(context).serbian;
     case 'pl':
-      return S.of(context).Polish;
+      return S.of(context).polish;
     case 'fa':
       return S.of(context).persian;
     case 'ta':
-      return S.of(context).Tamil;
+      return S.of(context).tamil;
 
     /// Stop support Kudish language due to some build issue and un-support from Flutter
     /// please refer to https://pub.dev/packages/kurdish_localization

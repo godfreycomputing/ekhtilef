@@ -54,7 +54,7 @@ class ProductListLargeCard extends StatelessWidget {
           child: Column(
             children: [
               HeaderView(
-                headerText: config.name ?? ' ',
+                headerText: config.name! +'homazeaz' ,//?? ' ',
                 showSeeAll: true,
                 callback: () => FluxNavigate.pushNamed(
                   RouteList.backdrop,

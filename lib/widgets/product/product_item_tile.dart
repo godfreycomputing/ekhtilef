@@ -166,7 +166,7 @@ class _ProductDescription extends StatelessWidget {
                 ),
               ),
             Text(
-              item.name!,
+              item.name! ,
               style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 15.0,

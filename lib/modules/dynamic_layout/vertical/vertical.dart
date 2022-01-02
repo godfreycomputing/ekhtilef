@@ -28,15 +28,15 @@ class VerticalLayout extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        if (config['name'] != null)
-          HeaderView(
-            headerText: config['name'] ?? '',
-            showSeeAll: !Config().isListingType,
-            callback: () => ProductModel.showList(
-              context: context,
-              config: config,
-            ),
-          ),
+        // if (config['name'] != null)
+        //   HeaderView(
+        //     headerText: config['name'] ! , // ?? '',?? '',
+        //     showSeeAll: !Config().isListingType,
+        //     callback: () => ProductModel.showList(
+        //       context: context,
+        //       config: config,
+        //     ),
+        //   ),
         renderLayout()
       ],
     );

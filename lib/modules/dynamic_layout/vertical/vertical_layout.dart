@@ -83,6 +83,8 @@ class _PinterestLayoutState extends State<VerticalViewLayout> {
                   type: SimpleListType.backgroundColor,
                 );
               }
+
+                print("=================== prod${_products[index]}");
               return Row(
                 children: List.generate(widthContent, (child) {
                   return Expanded(
@@ -91,8 +93,8 @@ class _PinterestLayoutState extends State<VerticalViewLayout> {
                             builder: (context, constraints) {
                               return ProductCard(
                                 item: _products[index * widthContent + child],
-                                showHeart: true,
-                                showCart: widget.config['layout'] != 'columns',
+                                showHeart: false,
+                                showCart: false,//widget.config['layout'] != 'columns',
                                 width: constraints.maxWidth,
                               );
                             },

@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:inspireui/icons/icon_picker.dart';
 import 'package:inspireui/inspireui.dart';
 import 'package:provider/provider.dart';
+import 'package:rate_my_app/rate_my_app.dart';
 
 import '../common/config.dart';
 import '../common/config/models/index.dart';
 import '../common/constants.dart';
 import '../common/tools.dart';
-import '../common/tools/adaptive_tools.dart';
 import '../generated/l10n.dart';
 import '../models/index.dart'
     show AppModel, BackDropArguments, Category, CategoryModel, UserModel;
@@ -37,6 +39,65 @@ class _MenuBarState extends State<SideBarMenu> {
     MainTabControlDelegate.getInstance().changeTab(name.replaceFirst('/', ''));
   }
 
+  final RateMyApp _rateMyApp = RateMyApp(
+      // rate app on store
+      minDays: 7,
+      minLaunches: 10,
+      remindDays: 7,
+      remindLaunches: 10,
+      googlePlayIdentifier: kStoreIdentifier['android'],
+      appStoreIdentifier: kStoreIdentifier['ios']);
+
+  void showRateMyApp() {
+    _rateMyApp.showRateDialog(
+      context,
+      title: S.of(context).rateTheApp,
+      // The dialog title.
+      message: S.of(context).rateThisAppDescription,
+      // The dialog message.
+      rateButton: S.of(context).rate.toUpperCase(),
+      // The dialog 'rate' button text.
+      noButton: S.of(context).noThanks.toUpperCase(),
+      // The dialog 'no' button text.
+      laterButton: S.of(context).maybeLater.toUpperCase(),
+      // The dialog 'later' button text.
+      listener: (button) {
+        // The button click listener (useful if you want to cancel the click event).
+        switch (button) {
+          case RateMyAppDialogButton.rate:
+            break;
+          case RateMyAppDialogButton.later:
+            break;
+          case RateMyAppDialogButton.no:
+            break;
+        }
+
+        return true; // Return false if you want to cancel the click event.
+      },
+      // Set to false if you want to show the native Apple app rating dialog on iOS.
+      dialogStyle: const DialogStyle(),
+      // Custom dialog styles.
+      // Called when the user dismissed the dialog (either by taping outside or by pressing the 'back' button).
+      // actionsBuilder: (_) => [], // This one allows you to use your own buttons.
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (isMobile) {
+      _rateMyApp.init().then((_) {
+        // state of rating the app
+        if (_rateMyApp.shouldOpenDialog) {
+          showRateMyApp();
+        }
+      });
+    }
+  }
+
+  void contactUs() {}
+
   @override
   Widget build(BuildContext context) {
     printLog('[AppState] Load Menu');
@@ -49,40 +110,150 @@ class _MenuBarState extends State<SideBarMenu> {
       padding: EdgeInsets.only(
           bottom: injector<AudioService>().isStickyAudioWidgetActive ? 46 : 0),
       child: Column(
-        key: drawer.key != null ? Key(drawer.key as String) : UniqueKey(),
-        children: <Widget>[
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 50),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (drawer.logo != null)
-                      Container(
-                        height: 38,
-                        margin:
-                            const EdgeInsets.only(bottom: 10, top: 10, left: 5),
-                        child: FluxImage(imageUrl: drawer.logo as String),
-                      ),
-                    const Divider(),
-                    ...List.generate(
-                      drawer.items!.length,
-                      (index) {
-                        return drawerItem(
-                            drawer.items![index], drawer.subDrawerItem ?? {});
-                      },
+          key: drawer.key != null ? Key(drawer.key as String) : UniqueKey(),
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (drawer.logo != null)
+                    LayoutBuilder(
+                      builder:
+                          (BuildContext context, BoxConstraints constraints) =>
+                              Container(
+                                  color: Colors.grey.withOpacity(.3),
+                                  height: constraints.maxWidth,
+                                  width: constraints.maxWidth,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Image.asset('assets/images/profile.png',
+                                          width: 222, height: 222, scale: 2.5),
+                                      //  FluxImage(
+                                      //   imageUrl: 'assets/images/profile.png',
+                                      //   width: 500,
+                                      //   height: 500,
+                                      // ),
+                                      Text(S.of(context).welcomeBack,
+                                          style: const TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold))
+                                    ],
+                                  )),
                     ),
-                    isDisplayDesktop(context)
-                        ? const SizedBox(height: 300)
-                        : const SizedBox(height: 24),
-                  ],
-                ),
+                  Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 30, right: 20),
+                      child: Column(children: <Widget>[
+                        GestureDetector(
+                            onTap: () {
+                              FluxNavigate.pushNamed(
+                                RouteList.orders,
+                              );
+                            },
+                            child: Row(
+                              children: <Widget>[
+                                const Icon(
+                                  FontAwesomeIcons.truck,
+                                  color: Colors.green,
+                                  size: 20,
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(S.of(context).myOrders,
+                                    style: const TextStyle(fontSize: 18))
+                              ],
+                            )),
+                        const SizedBox(height: 20),
+                        Row(
+                          children: <Widget>[
+                            const Icon(
+                              Icons.email,
+                              color: Colors.orange,
+                              size: 20,
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Text(S.of(context).contactUs,
+                                style: const TextStyle(fontSize: 18))
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        GestureDetector(
+                          onTap: showRateMyApp,
+                          child: Row(
+                            children: <Widget>[
+                              const Icon(
+                                Icons.favorite,
+                                color: Colors.pink,
+                                size: 20,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Text(S.of(context).showSomeLove,
+                                  style: const TextStyle(fontSize: 18))
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PostScreen(
+                                    pageId: 81,
+                                    pageTitle: S.of(context).agreeWithPrivacy),
+                              )),
+                          child: Row(
+                            children: <Widget>[
+                              const Icon(
+                                FontAwesomeIcons.infoCircle,
+                                color: Colors.blue,
+                                size: 20,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Text(S.of(context).privacyPolicy,
+                                  style: const TextStyle(fontSize: 18))
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        GestureDetector(
+                            onTap: () => Navigator.of(context)
+                                .pushNamed(RouteList.currencies),
+                            child: Row(
+                              children: <Widget>[
+                                const Icon(
+                                  FontAwesomeIcons.syncAlt,
+                                  color: Colors.purple,
+                                  size: 20,
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(S.of(context).changeCurrency,
+                                    style: const TextStyle(fontSize: 18))
+                              ],
+                            ))
+                      ])),
+                  // ...List.generate(
+                  //   drawer.items!.length,
+                  //   (index) {
+                  //     return drawerItem(
+                  //         drawer.items![index], drawer.subDrawerItem ?? {});
+                  //   },
+                  // ),
+                  // isDisplayDesktop(context)
+                  //     ? const SizedBox(height: 300)
+                  //     : const SizedBox(height: 24),
+                ],
               ),
             ),
-          )
-        ],
-      ),
+          ]),
     );
   }
 
@@ -323,8 +494,7 @@ class _MenuBarState extends State<SideBarMenu> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                            child: Text(currentCategory.name!.toUpperCase())),
+                        Text(currentCategory.name!.toUpperCase()),
                         const SizedBox(width: 24),
                         currentCategory.totalProduct == null
                             ? const Icon(Icons.chevron_right)

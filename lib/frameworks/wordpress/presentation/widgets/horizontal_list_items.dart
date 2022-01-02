@@ -70,7 +70,7 @@ class _LargeCardHorizontalListItemsState
                   child: Column(
                     children: <Widget>[
                       HeaderView(
-                        headerText: widget.config!['name'] ?? ' ',
+                        headerText: widget.config!['name'] ?? ' ' ,
                         showSeeAll: isRecent ? false : true,
                         callback: () => FluxNavigate.pushNamed(
                           RouteList.backdrop,
@@ -106,7 +106,7 @@ class _LargeCardHorizontalListItemsState
                 child: Column(
                   children: <Widget>[
                     HeaderView(
-                      headerText: widget.config?['name'] ?? ' ',
+                      headerText: widget.config?['name'] ?? ' ' ,
                       showSeeAll: isRecent ? false : true,
                       callback: () => FluxNavigate.pushNamed(
                         RouteList.backdrop,

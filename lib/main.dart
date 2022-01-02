@@ -16,6 +16,9 @@ import 'common/constants.dart';
 import 'common/tools.dart';
 import 'env.dart';
 
+import 'lib/core/common/appConfig.dart';
+import 'lib/core/localization/localization_provider.dart';
+import 'lib/service_locator.dart';
 import 'services/dependency_injection.dart';
 import 'services/locale_service.dart';
 import 'services/services.dart';
@@ -28,6 +31,14 @@ void main() {
   var languageCode =
       kAdvanceConfig['DefaultLanguage'] ?? Configurations.defaultLanguage;
 
+  SharedPreferences.setMockInitialValues({});
+  final _appLanguage = AppConfigProvider();
+  // Init Language.
+  () async {
+    await _appLanguage.fetchLocale();
+    appConfig.initVersion();
+    await setupInjection();
+  };
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('google_fonts/OFL.txt');
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);

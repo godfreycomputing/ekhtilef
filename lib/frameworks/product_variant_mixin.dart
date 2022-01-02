@@ -2,6 +2,11 @@ import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart' as html;
+import 'package:fstore/lib/app.dart';
+import 'package:fstore/lib/core/common/appConfig.dart';
+import 'package:fstore/lib/core/localization/localization_provider.dart';
+import 'package:fstore/lib/feature/image_editer_pro/screen/image_editor_pro.dart';
+import 'package:fstore/lib/service_locator.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
@@ -13,7 +18,7 @@ import '../models/index.dart'
 import '../screens/cart/cart_screen.dart';
 import '../services/service_config.dart';
 import '../widgets/common/webview.dart';
-import '../widgets/product/quantity_selection.dart';
+//import '../widgets/product/quantity_selection.dart';
 
 mixin ProductVariantMixin {
   ProductVariation? updateVariation(
@@ -240,29 +245,30 @@ mixin ProductVariantMixin {
       height: 44,
       width: MediaQuery.of(context).size.width * .7,
       decoration: BoxDecoration(
-        
-        borderRadius: BorderRadius.circular(50),
-        color: const Color(0xFF01BBD3)
-        // isExternal
-        //     ? (inStock &&
-        //             (product.attributes!.length == mapAttribute!.length) &&
-        //             isAvailable)
-        //         ? theme.primaryColor
-        //         : theme.disabledColor
-        //     : theme.primaryColor,
-      ),
+          borderRadius: BorderRadius.circular(50),
+          color: const Color(0xFF01BBD3)
+          // isExternal
+          //     ? (inStock &&
+          //             (product.attributes!.length == mapAttribute!.length) &&
+          //             isAvailable)
+          //         ? theme.primaryColor
+          //         : theme.disabledColor
+          //     : theme.primaryColor,
+          ),
       child: Center(
         child: Text(
-          (((inStock && isAvailable) || isExternal)
-              ? S.of(context).buyNow
-              : (isAvailable
-                      ? S.of(context).outOfStock
-                      : isVariationLoading
-                          ? S.of(context).loading
-                          : S.of(context).unavailable)
-                  .toUpperCase()),
-          style: const TextStyle(fontWeight: FontWeight.w700, color: Colors.white, fontSize: 20) 
-        ),
+            (((inStock && isAvailable) || isExternal)
+                ? S.of(context).buyNow
+                : (isAvailable
+                        ? S.of(context).outOfStock
+                        : isVariationLoading
+                            ? S.of(context).loading
+                            : S.of(context).unavailable)
+                    .toUpperCase()),
+            style: const TextStyle(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+                fontSize: 20)),
       ),
     );
 
@@ -330,7 +336,16 @@ mixin ProductVariantMixin {
         Row(children: <Widget>[
       Expanded(
         child: GestureDetector(
-          onTap: isAvailable ? () => addToCart(true, inStock) : null,
+          onTap: () async {
+            //img
+            
+            await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                         TShirtEditor(path: product.imageFeature)
+                        ));
+          }, //isAvailable ? () => addToCart(true, inStock) : null,
           child: buyOrOutOfStockButton,
         ),
       ),

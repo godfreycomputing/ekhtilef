@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fstore/models/cart/cart_base.dart';
+import 'package:fstore/modules/dynamic_layout/index.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants.dart';
@@ -95,6 +97,78 @@ class _HomeLayoutState extends State<HomeLayout> {
     super.didUpdateWidget(oldWidget);
   }
 
+  Widget cartIcon() {
+    var totalCart = Provider.of<CartModel>(context).totalCartQuantity;
+    
+    return Container(
+         width: 50,
+       height: 40,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+                const Icon(Icons.shopping_cart, size: 24, color: Colors.black),
+                if(totalCart> 0)
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+                alignment: Alignment.center,
+                child:  Text('$totalCart',style:const TextStyle(
+              color: Colors.white,
+              fontSize: 8,
+            ),
+            textAlign: TextAlign.center,
+          
+        )
+              ),
+            )
+          ],
+        ),);
+       
+    
+  //   return Stack(children: <Widget>[
+  //      const Icon(Icons.shopping_cart, size: 24, color: Colors.black),
+  //      Positioned(
+  //        top: 0,
+  //        left: 0,
+  //       //right: 0,
+  //       child:  Container(
+  //         padding: const EdgeInsets.all(2),
+  //         decoration:  BoxDecoration(
+  //           color: Colors.red.shade400,
+  //           borderRadius: BorderRadius.circular(6),
+  //         ),
+  //         constraints: const BoxConstraints(
+  //           minWidth: 12,
+  //           minHeight: 12,
+  //         ),
+  //         child: Selector<CartModel, int>(
+  //         selector: (_, cartModel) => cartModel.totalCartQuantity,
+  //         builder: (context, totalCartQuantity, child) {
+  //           return Text('$totalCartQuantity',style:const TextStyle(
+  //             color: Colors.white,
+  //             fontSize: 8,
+  //           ),
+  //           textAlign: TextAlign.center,);
+  //         },
+  //       ),
+  //       ),
+  //     )
+  //   ],
+  // );
+    //   Positioned(
+    //     top: 0,
+    //     right: 0,
+    //     child: 
+        
+    //   ),
+    //   const Icon(Icons.shopping_cart, size: 24, color: Colors.black)
+    // ]);
+  }
+
   SliverAppBar renderAppBar() {
     List<dynamic> horizonLayout = widget.configs['HorizonLayout'] ?? [];
     Map logoConfig = horizonLayout.firstWhere(
@@ -115,49 +189,75 @@ class _HomeLayoutState extends State<HomeLayout> {
     //   ..showLogo = true
     //   ..showCart = true
     //   ..showMenu = true;
-
+    //Appbarekhtif
     return SliverAppBar(
-      systemOverlayStyle: SystemUiOverlayStyle.light,
-      pinned: widget.isPinAppBar,
-      snap: true,
-      floating: true,
-      titleSpacing: 0,
-      elevation: 0,
-      forceElevated: true,
-      backgroundColor: config.color ??
-          Theme.of(context).backgroundColor.withOpacity(config.opacity),
-      title: PreviewOverlay(
-          index: 0,
-          config: logoConfig as Map<String, dynamic>?,
-          builder: (value) {
-            final appModel = Provider.of<AppModel>(context, listen: true);
-            return Logo(
-              key: value['key'] != null ? Key(value['key']) : UniqueKey(),
-              config: config,
-              logo: appModel.themeConfig.logo,
-              notificationCount:
-                  Provider.of<NotificationModel>(context).unreadCount,
-              onSearch: () =>
-                  Navigator.of(context).pushNamed(RouteList.homeSearch),
-              onTapNotifications: () {
-                Navigator.of(context).pushNamed(RouteList.notify);
-              },
-              onCheckout: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => Scaffold(
-                      backgroundColor: Theme.of(context).backgroundColor,
-                      body: const CartScreen(isModal: true),
-                    ),
-                    fullscreenDialog: true,
-                  ),
-                );
-              },
-              onTapDrawerMenu: () => NavigateTools.onTapOpenDrawerMenu(context),
-            );
-          }),
-    );
+        pinned: true,
+        backgroundColor: config.color ??
+            Theme.of(context).backgroundColor.withOpacity(config.opacity),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () => NavigateTools.onTapOpenDrawerMenu(context),
+              child: const Icon(
+                Icons.menu,
+                size: 24,
+                color: Colors.black,
+              ),
+            ),
+            // const Spacer(),
+            const Text(
+              'Ekhtilef',
+              style: TextStyle(fontSize: 18, letterSpacing: 1.2,),
+            ),
+            // const Spacer(),
+            GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed('cart'),
+                child: cartIcon())
+          ],
+        ));
+    // SliverAppBar(
+    //   systemOverlayStyle: SystemUiOverlayStyle.light,
+    //   pinned: widget.isPinAppBar,
+    //   snap: true,
+    //   floating: true,
+    //   titleSpacing: 0,
+    //   elevation: 0,
+    //   forceElevated: true,
+    //   backgroundColor: config.color ??
+    //       Theme.of(context).backgroundColor.withOpacity(config.opacity),
+    //   title: PreviewOverlay(
+    //       index: 0,
+    //       config: logoConfig as Map<String, dynamic>?,
+    //       builder: (value) {
+    //         final appModel = Provider.of<AppModel>(context, listen: true);
+    //         return Logo(
+    //           key: value['key'] != null ? Key(value['key']) : UniqueKey(),
+    //           config: config,
+    //           logo: appModel.themeConfig.logo,
+    //           notificationCount:
+    //               Provider.of<NotificationModel>(context).unreadCount,
+    //           onSearch: () =>
+    //               Navigator.of(context).pushNamed(RouteList.homeSearch),
+    //           onTapNotifications: () {
+    //             Navigator.of(context).pushNamed(RouteList.notify);
+    //           },
+    //           onCheckout: () {
+    //             Navigator.push(
+    //               context,
+    //               MaterialPageRoute<void>(
+    //                 builder: (BuildContext context) => Scaffold(
+    //                   backgroundColor: Theme.of(context).backgroundColor,
+    //                   body: const CartScreen(isModal: true),
+    //                 ),
+    //                 fullscreenDialog: true,
+    //               ),
+    //             );
+    //           },
+    //           onTapDrawerMenu: () => NavigateTools.onTapOpenDrawerMenu(context),
+    //         );
+    //       }),
+    // );
   }
 
   SliverAppBar renderNewAppBar() {
@@ -182,6 +282,7 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   @override
   Widget build(BuildContext context) {
+    
     if (widget.configs == null) return Container();
 
     ErrorWidget.builder = (error) {
@@ -212,19 +313,20 @@ class _HomeLayoutState extends State<HomeLayout> {
           cacheExtent: 2000.0,
           physics: const BouncingScrollPhysics(),
           slivers: [
-            if (widget.showNewAppBar) renderNewAppBar(),
+            // if (widget.showNewAppBar) renderNewAppBar(),
             if (widget.isShowAppbar && !widget.showNewAppBar) renderAppBar(),
-            CupertinoSliverRefreshControl(
-              onRefresh: () async {
-                await Provider.of<ListBlogModel>(context, listen: false)
-                    .getBlogs();
-              },
-            ),
+            // CupertinoSliverRefreshControl(
+            //   onRefresh: () async {
+            //     await Provider.of<ListBlogModel>(context, listen: false)
+            //         .getBlogs();
+            //   },
+            // ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   var config = widgetData[index];
 
+                  print("========$config");
                   /// if show app bar, the preview should plus +1
                   var previewIndex = widget.isShowAppbar ? index + 1 : index;
 
@@ -233,6 +335,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                         index: previewIndex,
                         config: config,
                         builder: (value) {
+                          // print("eeeeeeheeeeeeeeh ${value}");
                           return Services().widget.renderVerticalLayout(value);
                         });
                   }

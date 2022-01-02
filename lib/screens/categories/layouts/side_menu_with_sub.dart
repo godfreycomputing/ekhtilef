@@ -257,7 +257,7 @@ class _StateGridSubCategory extends State<GridSubCategory> {
                         child: InkResponse(
                           onTap: _seeAllProduct,
                           child: Text(
-                            S.of(context).seeAll,
+                            S.of(context).seeAll ,
                             style: TextStyle(
                               fontSize: kIsWeb ? 18 : 14,
                               fontWeight: FontWeight.w500,
@@ -275,7 +275,7 @@ class _StateGridSubCategory extends State<GridSubCategory> {
                           child: InkResponse(
                             onTap: _seeAllProduct,
                             child: Text(
-                              S.of(context).seeAll,
+                              S.of(context).seeAll ,
                               style: TextStyle(
                                 fontSize: kIsWeb ? 18 : 14,
                                 fontWeight: FontWeight.w500,

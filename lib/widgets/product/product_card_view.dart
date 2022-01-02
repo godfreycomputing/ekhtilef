@@ -13,11 +13,11 @@ import '../../models/index.dart'
     show AppModel, CartModel, Product, ProductVariation, RecentModel;
 import '../../routes/flux_navigate.dart';
 import '../../services/service_config.dart';
-import '../common/sale_progress_bar.dart';
-import '../common/start_rating.dart';
+//import '../common/sale_progress_bar.dart';
+//import '../common/start_rating.dart';
 import 'dialog_add_to_cart.dart';
-import 'heart_button.dart';
-import 'quantity_selection.dart';
+//import 'heart_button.dart';
+//import 'quantity_selection.dart';
 
 class ProductCard extends StatelessWidget {
   final Product item;
@@ -81,7 +81,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currency = Provider.of<AppModel>(context, listen: false).currencyCode;
-    final currencyRate = Provider.of<AppModel>(context).currencyRate;
+     final currencyRate = Provider.of<AppModel>(context).currencyRate;
     var salePercent = 0;
 
     double? regularPrice = 0.0;
@@ -118,11 +118,11 @@ class ProductCard extends StatelessWidget {
       );
     }
 
-    var priceProduct = PriceTools.getPriceProductValue(
-      item,
-      currency,
-      onSale: true,
-    );
+    // var priceProduct = PriceTools.getPriceProductValue(
+    //   item,
+    //   currency,
+    //   onSale: true,
+    // );
 
     /// Sold by widget
     var _soldByStore = item.store != null && item.store!.name != ''
@@ -136,265 +136,293 @@ class ProductCard extends StatelessWidget {
         : const SizedBox();
 
     /// product name
-    Widget _productTitle = Text(
-      '${item.name!}\n',
-      style: Theme.of(context).textTheme.subtitle1!.apply(
-            fontSizeFactor: 0.9,
-          ),
-      maxLines: 2,
-    );
+    // Widget _productTitle = Text(
+    //   '${item.name!}\n',
+    //   style: Theme.of(context).textTheme.subtitle1!.apply(
+    //         fontSizeFactor: 0.9,
+    //       ),
+    //   maxLines: 2,
+    // );
 
-    /// Show Cart button
-    var _quantity = 1;
-    var _cartIcon = IconButton(
-      iconSize: 18.0,
-      constraints: showQuantitySelector ? const BoxConstraints() : null,
-      icon: const Icon(
-        Icons.add_shopping_cart,
-      ),
-      onPressed: () => addToCart(context, quantity: _quantity),
-    );
+    // /// Show Cart button
+    // var _quantity = 1;
+    // var _cartIcon = IconButton(
+    //   iconSize: 18.0,
+    //   constraints: showQuantitySelector ? const BoxConstraints() : null,
+    //   icon: const Icon(
+    //     Icons.add_shopping_cart,
+    //   ),
+    //   onPressed: () => addToCart(context, quantity: _quantity),
+    // );
 
-    var _canAddToCart = item.canBeAddedToCartFromList;
+    // var _canAddToCart = item.canBeAddedToCartFromList;
 
-    var _showCart = (showCart && _canAddToCart && !showQuantitySelector)
-        ? _cartIcon
-        : const SizedBox(width: 30, height: 30);
+    // var _showCart = (showCart && _canAddToCart && !showQuantitySelector)
+    //     ? _cartIcon
+    //     : const SizedBox(width: 30, height: 30);
 
-    /// Product Pricing
-    Widget _productPricing = Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
-        Text(
-          item.type == 'grouped'
-              ? '${S.of(context).from} ${PriceTools.getPriceProduct(item, currencyRate, currency, onSale: true)}'
-              : priceProduct == '0.0'
-                  ? S.of(context).loading
-                  : Config().isListingType
-                      ? PriceTools.getCurrencyFormatted(
-                          item.price ?? item.regularPrice ?? '0', null)!
-                      : PriceTools.getPriceProduct(item, currencyRate, currency,
-                          onSale: true)!,
-          style: Theme.of(context)
-              .textTheme
-              .headline6!
-              .copyWith(
-                fontWeight: FontWeight.w600,
-              )
-              .apply(fontSizeFactor: 0.8),
-        ),
+    // /// Product Pricing
+    // Widget _productPricing = Wrap(
+    //   crossAxisAlignment: WrapCrossAlignment.center,
+    //   children: <Widget>[
+    //     Text(
+    //       item.type == 'grouped'
+    //           ? '${S.of(context).from} ${PriceTools.getPriceProduct(item, currencyRate, currency, onSale: true)}'
+    //           : priceProduct == '0.0'
+    //               ? S.of(context).loading
+    //               : Config().isListingType
+    //                   ? PriceTools.getCurrencyFormatted(
+    //                       item.price ?? item.regularPrice ?? '0', null)!
+    //                   : PriceTools.getPriceProduct(item, currencyRate, currency,
+    //                       onSale: true)!,
+    //       style: Theme.of(context)
+    //           .textTheme
+    //           .headline6!
+    //           .copyWith(
+    //             fontWeight: FontWeight.w600,
+    //           )
+    //           .apply(fontSizeFactor: 0.8),
+    //     ),
 
-        /// Not show regular price for variant product (product.regularPrice = "").
-        if (isSale && item.type != 'variable') ...[
-          const SizedBox(width: 5),
-          Text(
-            item.type == 'grouped'
-                ? ''
-                : PriceTools.getPriceProduct(item, currencyRate, currency,
-                    onSale: false)!,
-            style: Theme.of(context)
-                .textTheme
-                .caption!
-                .copyWith(
-                  fontWeight: FontWeight.w300,
-                  color:
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.6),
-                  decoration: TextDecoration.lineThrough,
-                )
-                .apply(fontSizeFactor: 0.8),
-          ),
-        ],
-      ],
-    );
+    //     /// Not show regular price for variant product (product.regularPrice = "").
+    //     if (isSale && item.type != 'variable') ...[
+    //       const SizedBox(width: 5),
+    //       Text(
+    //         item.type == 'grouped'
+    //             ? ''
+    //             : PriceTools.getPriceProduct(item, currencyRate, currency,
+    //                 onSale: false)!,
+    //         style: Theme.of(context)
+    //             .textTheme
+    //             .caption!
+    //             .copyWith(
+    //               fontWeight: FontWeight.w300,
+    //               color:
+    //                   Theme.of(context).colorScheme.secondary.withOpacity(0.6),
+    //               decoration: TextDecoration.lineThrough,
+    //             )
+    //             .apply(fontSizeFactor: 0.8),
+    //       ),
+    //     ],
+    //   ],
+    // );
 
     /// Product Stock Status
-    var _stockStatus = _buildStockStatus(context);
+    // var _stockStatus = _buildStockStatus(context);
 
-    /// product rating, Hide rating for onSale layout.
-    var _rating = (kAdvanceConfig['EnableRating'] ?? false) &&
-            (kAdvanceConfig['hideEmptyProductListRating'] == false ||
-                (item.ratingCount != null && item.ratingCount! > 0)) &&
-            !(showProgressBar)
-        ? SmoothStarRating(
-            allowHalfRating: true,
-            starCount: 5,
-            rating: item.averageRating ?? 0.0,
-            size: 10.0,
-            color: kColorRatingStar,
-            borderColor: kColorRatingStar,
-            label: Text(
-              item.ratingCount == 0 || item.ratingCount == null
-                  ? ''
-                  : '${item.ratingCount}',
-              style: Theme.of(context)
-                  .textTheme
-                  .caption!
-                  .apply(fontSizeFactor: 0.7),
-            ),
-            spacing: 0.0)
-        : const SizedBox();
+    // /// product rating, Hide rating for onSale layout.
+    // var _rating = (kAdvanceConfig['EnableRating'] ?? false) &&
+    //         (kAdvanceConfig['hideEmptyProductListRating'] == false ||
+    //             (item.ratingCount != null && item.ratingCount! > 0)) &&
+    //         !(showProgressBar)
+    //     ? SmoothStarRating(
+    //         allowHalfRating: true,
+    //         starCount: 5,
+    //         rating: item.averageRating ?? 0.0,
+    //         size: 10.0,
+    //         color: kColorRatingStar,
+    //         borderColor: kColorRatingStar,
+    //         label: Text(
+    //           item.ratingCount == 0 || item.ratingCount == null
+    //               ? ''
+    //               : '${item.ratingCount}',
+    //           style: Theme.of(context)
+    //               .textTheme
+    //               .caption!
+    //               .apply(fontSizeFactor: 0.7),
+    //         ),
+    //         spacing: 0.0)
+    //     : const SizedBox();
 
     /// Show Stock status & Rating
-    Widget _productStockRating = StatefulBuilder(
-      builder: (_, StateSetter setState) {
-        return Align(
-          alignment: Alignment.bottomLeft,
-          child: Stack(
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        _stockStatus,
-                        _rating,
-                        if (showQuantitySelector && showCart && _canAddToCart)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                QuantitySelection(
-                                  width: 50,
-                                  height: 30,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                  limitSelectQuantity:
-                                      kCartDetail['maxAllowQuantity'] ?? 100,
-                                  value: _quantity,
-                                  onChanged: (int value) {
-                                    setState(() {
-                                      _quantity = value;
-                                    });
-                                  },
-                                  useNewDesign: true,
-                                ),
-                                const Spacer(),
-                                _cartIcon,
-                              ],
-                            ),
-                          ),
-                        const SizedBox(height: 4),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                ],
-              ),
-              Positioned(
-                left:
-                    Directionality.of(context) == TextDirection.rtl ? 0 : null,
-                right:
-                    Directionality.of(context) == TextDirection.rtl ? null : 0,
-                top: -14,
-                child: _showCart,
-              )
-            ],
-          ),
-        );
-      },
-    );
+    // Widget _productStockRating = StatefulBuilder(
+    //   builder: (_, StateSetter setState) {
+    //     return Align(
+    //       alignment: Alignment.bottomLeft,
+    //       child: Stack(
+    //         children: [
+    //           Row(
+    //             mainAxisSize: MainAxisSize.max,
+    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //             crossAxisAlignment: CrossAxisAlignment.center,
+    //             children: <Widget>[
+    //               Expanded(
+    //                 child: Column(
+    //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //                   children: <Widget>[
+    //                     _stockStatus,
+    //                     _rating,
+    //                     if (showQuantitySelector && showCart && _canAddToCart)
+    //                       Padding(
+    //                         padding: const EdgeInsets.only(top: 5.0),
+    //                         child: Row(
+    //                           mainAxisSize: MainAxisSize.max,
+    //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //                           children: [
+    //                             QuantitySelection(
+    //                               width: 50,
+    //                               height: 30,
+    //                               color:
+    //                                   Theme.of(context).colorScheme.secondary,
+    //                               limitSelectQuantity:
+    //                                   kCartDetail['maxAllowQuantity'] ?? 100,
+    //                               value: _quantity,
+    //                               onChanged: (int value) {
+    //                                 setState(() {
+    //                                   _quantity = value;
+    //                                 });
+    //                               },
+    //                               useNewDesign: true,
+    //                             ),
+    //                             const Spacer(),
+    //                             // _cartIcon,
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     const SizedBox(height: 4),
+    //                   ],
+    //                 ),
+    //               ),
+    //               const SizedBox(width: 10),
+    //             ],
+    //           ),
+    //           Positioned(
+    //             left:
+    //                 Directionality.of(context) == TextDirection.rtl ? 0 : null,
+    //             right:
+    //                 Directionality.of(context) == TextDirection.rtl ? null : 0,
+    //             top: -14,
+    //             child: _showCart,
+    //           )
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
 
     Widget _productImage = Stack(
       children: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.circular(
-              ((radius ?? kProductCard['borderRadius'] ?? 3) * 0.7)),
-          child: Container(
-            constraints: BoxConstraints(maxHeight: productImage),
-            child: Transform.translate(
-              offset: Offset(18 * gauss, 0.0),
-              child: _buildImageFeature(
-                context,
-                () => _onTapProduct(context),
+        Container(
+          margin: const EdgeInsets.all(4),
+          //margin: const EdgeInsets.all(15),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(.8),
+                offset: const Offset(0.5, 7),
+                blurRadius: 6.0,
+                spreadRadius: 1.0,
+              )
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20
+                //((radius ?? kProductCard['borderRadius'] ?? 3) * 0.7),
+                ),
+            child: Container(
+              constraints: BoxConstraints(maxHeight: productImage * .59),
+              child: Transform.translate(
+                offset: Offset(18 * gauss, 0.0),
+                child: _buildImageFeature(
+                  context,
+                  () => _onTapProduct(context),
+                ),
               ),
             ),
           ),
         ),
-
-        /// Not show sale percent for variant product (product.regularPrice = "").
-        if (isSale &&
-            (item.regularPrice?.isNotEmpty ?? false) &&
-            regularPrice != null &&
-            regularPrice != 0.0 &&
-            item.type != 'variable')
-          Positioned(
-            left: 0,
-            top: 0,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(radius ?? 0.0),
-                  bottomRight: Radius.circular(radius ?? 12),
-                ),
-              ),
-              child: Text(
-                '$salePercent%',
-                style: Theme.of(context)
-                    .textTheme
-                    .caption!
-                    .copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    )
-                    .apply(fontSizeFactor: 0.9),
-              ),
-            ),
-          ),
-
-        /// Show On Sale label for variant product.
-        if (isSale && item.type == 'variable')
-          Align(
-            alignment: Alignment.topLeft,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(radius ?? 0.0),
-                  bottomRight: Radius.circular(radius ?? 8),
-                ),
-              ),
-              child: Text(
-                S.of(context).onSale,
+        Positioned(
+          top: 20,
+          left: 20,
+          child: SizedBox(
+            width: 150,
+            child: Text(item.name!,
                 style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white),
-              ),
-            ),
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700)),
           ),
+        ),
       ],
+
+      /// Not show sale percent for variant product (product.regularPrice = "").
+      // if (isSale &&
+      //     (item.regularPrice?.isNotEmpty ?? false) &&
+      //     regularPrice != null &&
+      //     regularPrice != 0.0 &&
+      //     item.type != 'variable')
+      //   Positioned(
+      //     left: 0,
+      //     top: 0,
+      //     child: Container(
+      //       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      //       decoration: BoxDecoration(
+      //         color: Colors.redAccent,
+      //         borderRadius: BorderRadius.only(
+      //           topLeft: Radius.circular(radius ?? 0.0),
+      //           bottomRight: Radius.circular(radius ?? 12),
+      //         ),
+      //       ),
+      //       child: Text(
+      //         '$salePercent%',
+      //         style: Theme.of(context)
+      //             .textTheme
+      //             .caption!
+      //             .copyWith(
+      //               fontWeight: FontWeight.w700,
+      //               color: Colors.white,
+      //             )
+      //             .apply(fontSizeFactor: 0.9),
+      //       ),
+      //     ),
+      //   ),
+
+      /// Show On Sale label for variant product.
+      // if (isSale && item.type == 'variable')
+      //   Align(
+      //     alignment: Alignment.topLeft,
+      //     child: Container(
+      //       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      //       decoration: BoxDecoration(
+      //         color: Colors.redAccent,
+      //         borderRadius: BorderRadius.only(
+      //           topLeft: Radius.circular(radius ?? 0.0),
+      //           bottomRight: Radius.circular(radius ?? 8),
+      //         ),
+      //       ),
+      //       child: Text(
+      //         S.of(context).onSale,
+      //         style: const TextStyle(
+      //             fontSize: 12,
+      //             fontWeight: FontWeight.w600,
+      //             color: Colors.white),
+      //       ),
+      //     ),
+      //   ),
     );
 
     Widget _productInfo = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        if (!(kProductCard['hideTitle'] ?? false)) _productTitle,
+        //if (!(kProductCard['hideTitle'] ?? false)) _productTitle,
         if (!(kProductCard['hideStore'] ?? false)) _soldByStore,
         const SizedBox(height: 5),
-        if (!(kProductCard['hidePrice'] ?? false))
-          Row(
-            children: [
-              Expanded(child: _productPricing),
-            ],
-          ),
+        // if (!(kProductCard['hidePrice'] ?? false))
+        //   Row(
+        //     children: [
+        //       Expanded(child: _productPricing),
+        //     ],
+        //   ),
         const SizedBox(height: 2),
-        _productStockRating,
+        //_productStockRating,
       ],
     );
 
     return GestureDetector(
       onTap: () => _onTapProduct(context),
-      behavior: HitTestBehavior.opaque,
+      behavior: HitTestBehavior.translucent,
       child: Stack(
         children: <Widget>[
           Container(
@@ -402,7 +430,7 @@ class ProductCard extends StatelessWidget {
             width: width!,
             decoration: BoxDecoration(
               boxShadow: [
-                if (kProductCard['boxShadow'] != null)
+                if (kProductCard['boxShadow'] != null) //YAJAR
                   BoxShadow(
                     color: Colors.black12,
                     offset: Offset(
@@ -446,12 +474,12 @@ class ProductCard extends StatelessWidget {
               ),
             ),
           ),
-          if (showHeart && !item.isEmptyProduct())
-            Positioned(
-              top: 5,
-              right: 5,
-              child: HeartButton(product: item, size: 18),
-            )
+          // if (showHeart && !item.isEmptyProduct())
+          //   Positioned(
+          //     top: 5,
+          //     right: 5,
+          //     child: HeartButton(product: item, size: 18),
+          //   )
         ],
       ),
     );
@@ -494,10 +522,10 @@ class ProductCard extends StatelessWidget {
   }
 
   void _onTapProduct(context) {
-    if (item.imageFeature == '') return;
-    Provider.of<RecentModel>(context, listen: false).addRecentProduct(item);
-    //Load update product detail screen for FluxBuilder
-    eventBus.fire(const EventDetailSettings());
+    // if (item.imageFeature == '') return;
+    // Provider.of<RecentModel>(context, listen: false).addRecentProduct(item);
+    // //Load update product detail screen for FluxBuilder
+    // eventBus.fire(const EventDetailSettings());
     FluxNavigate.pushNamed(
       RouteList.productDetail,
       arguments: item,
@@ -575,34 +603,34 @@ class ProductCard extends StatelessWidget {
     }
   }
 
-  Widget _buildStockStatus(BuildContext context) {
-    if (showProgressBar) {
-      return SaleProgressBar(width: width, product: item);
-    }
+  // Widget _buildStockStatus(BuildContext context) {
+  //   if (showProgressBar) {
+  //     return SaleProgressBar(width: width, product: item);
+  //   }
 
-    return ((kAdvanceConfig['showStockStatus'] ?? false) &&
-            !item.isEmptyProduct())
-        ? item.backOrdered
-            ? Text(
-                S.of(context).backOrder,
-                style: const TextStyle(
-                  color: kColorBackOrder,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12,
-                ),
-              )
-            : item.inStock != null
-                ? Text(
-                    item.inStock!
-                        ? S.of(context).inStock
-                        : S.of(context).outOfStock,
-                    style: TextStyle(
-                      color: item.inStock! ? kColorInStock : kColorOutOfStock,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                    ),
-                  )
-                : const SizedBox()
-        : const SizedBox();
-  }
+  //   return ((kAdvanceConfig['showStockStatus'] ?? false) &&
+  //           !item.isEmptyProduct())
+  //       ? item.backOrdered
+  //           ? Text(
+  //               S.of(context).backOrder,
+  //               style: const TextStyle(
+  //                 color: kColorBackOrder,
+  //                 fontWeight: FontWeight.w500,
+  //                 fontSize: 12,
+  //               ),
+  //             )
+  //           : item.inStock != null
+  //               ? Text(
+  //                   item.inStock!
+  //                       ? S.of(context).inStock
+  //                       : S.of(context).outOfStock,
+  //                   style: TextStyle(
+  //                     color: item.inStock! ? kColorInStock : kColorOutOfStock,
+  //                     fontWeight: FontWeight.w500,
+  //                     fontSize: 12,
+  //                   ),
+  //                 )
+  //               : const SizedBox()
+  //       : const SizedBox();
+  //}
 }

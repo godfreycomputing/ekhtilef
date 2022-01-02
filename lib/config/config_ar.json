@@ -16,7 +16,7 @@
   ],
   "Setting": {
     "StickyHeader": true,
-    "ProductDetail": "fullSizeImageType",
+    "ProductDetail": "halfSizeImageType",
     "TabBarConfig": {
       "isSafeArea": false,
       "marginBottom": 14.973564791065872,

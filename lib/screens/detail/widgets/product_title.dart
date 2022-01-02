@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quiver/strings.dart';
 
-import '../../../common/config.dart';
+// import '../../../common/config.dart';
 import '../../../common/constants.dart';
-import '../../../common/tools.dart';
-import '../../../generated/l10n.dart';
+// import '../../../common/tools.dart';
+// import '../../../generated/l10n.dart';
 import '../../../models/index.dart'
-    show AppModel, Product, ProductModel, ProductVariation;
-import '../../../modules/dynamic_layout/helper/countdown_timer.dart';
-import '../../../services/index.dart';
-import '../../../widgets/common/sale_progress_bar.dart';
-import '../../../widgets/common/start_rating.dart';
+    show /*AppModel,*/ Product, ProductModel, ProductVariation;
+// import '../../../modules/dynamic_layout/helper/countdown_timer.dart';
+// import '../../../services/index.dart';
+// import '../../../widgets/common/sale_progress_bar.dart';
+// import '../../../widgets/common/start_rating.dart';
 import '../../base_screen.dart';
 
 class ProductTitle extends StatefulWidget {
@@ -83,24 +83,24 @@ class _ProductTitleState extends BaseScreen<ProductTitle> {
     productVariation = Provider.of<ProductModel>(context).productVariation;
     getProductPrice();
 
-    final currency = Provider.of<AppModel>(context).currency;
-    final currencyRate = Provider.of<AppModel>(context).currencyRate;
-    final dateOnSaleTo = DateTime.tryParse(productVariation?.dateOnSaleTo ??
-            widget.product!.dateOnSaleTo ??
-            '')
-        ?.millisecondsSinceEpoch;
-    final countDown =
-        (dateOnSaleTo ?? 0) - DateTime.now().millisecondsSinceEpoch;
-    var isShowCountDown = (kSaleOffProduct['ShowCountDown'] ?? false) &&
-        dateOnSaleTo != null &&
-        countDown > 0;
+    // final currency = Provider.of<AppModel>(context).currency;
+    // final currencyRate = Provider.of<AppModel>(context).currencyRate;
+    // final dateOnSaleTo = DateTime.tryParse(productVariation?.dateOnSaleTo ??
+    //         widget.product!.dateOnSaleTo ??
+    //         '')
+    //     ?.millisecondsSinceEpoch;
+    // final countDown =
+    //     (dateOnSaleTo ?? 0) - DateTime.now().millisecondsSinceEpoch;
+    // var isShowCountDown = (kSaleOffProduct['ShowCountDown'] ?? false) &&
+    //     dateOnSaleTo != null &&
+    //     countDown > 0;
 
-    var isSaleOff = (onSale! &&
-            widget.product!.type != 'grouped' &&
-            widget.product!.type != 'variable') ||
-        (onSale! &&
-            widget.product!.type == 'variable' &&
-            productVariation != null);
+    // var isSaleOff = (onSale! &&
+    //         widget.product!.type != 'grouped' &&
+    //         widget.product!.type != 'variable') ||
+    //     (onSale! &&
+    //         widget.product!.type == 'variable' &&
+    //         productVariation != null);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -125,13 +125,11 @@ class _ProductTitleState extends BaseScreen<ProductTitle> {
           children: [
             Flexible(
               child: Text(
-                widget.product!.name! + "hloptitle",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5!
-                    .apply(fontSizeFactor: 0.9),
+                widget.product!.name!,
+                style: Theme.of(context).textTheme.headline5!.apply(),
               ),
             ),
+
             // if (isSaleOff)
             //   Container(
             //     padding: const EdgeInsets.symmetric(
@@ -209,42 +207,48 @@ class _ProductTitleState extends BaseScreen<ProductTitle> {
         //       ),
         //   ],
         // ),
-        Row(
-          textBaseline: TextBaseline.alphabetic,
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          children: [
-            if (kAdvanceConfig['EnableRating'])
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0),
-                child: SmoothStarRating(
-                  allowHalfRating: true,
-                  starCount: 5,
-                  spacing: 0.0,
-                  rating: widget.product!.averageRating,
-                  size: 17.0,
-                  label: Text(
-                    ' (${widget.product!.ratingCount})',
-                    style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary
-                              .withOpacity(0.8),
-                        ),
-                  ),
-                ),
-              ),
-            const Spacer(),
-            if (dateOnSaleTo != null && countDown > 0)
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: SaleProgressBar(
-                  product: widget.product,
-                  productVariation: productVariation,
-                  width: 160,
-                ),
-              ),
-          ],
+        // Row(
+        //   textBaseline: TextBaseline.alphabetic,
+        //   crossAxisAlignment: CrossAxisAlignment.baseline,
+        //   children: [
+        //     if (kAdvanceConfig['EnableRating'])
+        //       Padding(
+        //         padding: const EdgeInsets.only(top: 5.0),
+        //         child: SmoothStarRating(
+        //           allowHalfRating: true,
+        //           starCount: 5,
+        //           spacing: 0.0,
+        //           rating: widget.product!.averageRating,
+        //           size: 17.0,
+        //           label: Text(
+        //             ' (${widget.product!.ratingCount})',
+        //             style: Theme.of(context).textTheme.subtitle2!.copyWith(
+        //                   color: Theme.of(context)
+        //                       .colorScheme
+        //                       .secondary
+        //                       .withOpacity(0.8),
+        //                 ),
+        //           ),
+        //         ),
+        //       ),
+        //     const Spacer(),
+        //     if (dateOnSaleTo != null && countDown > 0)
+        //       Padding(
+        //         padding: const EdgeInsets.only(left: 8.0),
+        //         child: SaleProgressBar(
+        //           product: widget.product,
+        //           productVariation: productVariation,
+        //           width: 160,
+        //         ),
+        //       ),
+        //   ],
+        // ),
+        const SizedBox(
+          height: 10,
         ),
+        Text('SAR ${widget.product!.price!}',
+            style: const TextStyle(
+                fontSize: 20, color: Colors.blue, fontWeight: FontWeight.w800)),
       ],
     );
   }

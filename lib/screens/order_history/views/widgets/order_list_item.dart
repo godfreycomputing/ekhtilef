@@ -250,7 +250,7 @@ class OrderListItem extends StatelessWidget {
                                 order.totalTax, null),
                           ),
                           OrderStatusWidget(
-                            title: S.of(context).Qty,
+                            title: S.of(context).qty,
                             detail: order.quantity.toString(),
                           ),
                           if (order.status != null)

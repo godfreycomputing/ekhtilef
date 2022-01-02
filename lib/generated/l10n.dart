@@ -10,7 +10,7 @@ import 'intl/messages_all.dart';
 
 // ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
-// ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
+// ignore_for_file: avoid_redundant_argument_values
 
 class S {
   S();
@@ -18,36 +18,83 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(_current != null,
-        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    assert(_current != null, 'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
     return _current!;
   }
 
-  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
+  static const AppLocalizationDelegate delegate =
+    AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name);
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       final instance = S();
       S._current = instance;
-
+ 
       return instance;
     });
-  }
+  } 
 
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
-    assert(instance != null,
-        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    assert(instance != null, 'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
     return instance!;
   }
 
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
+  }
+
+  /// `Welcome Back`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome Back',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Currency`
+  String get changeCurrency {
+    return Intl.message(
+      'Change Currency',
+      name: 'changeCurrency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Some Love`
+  String get showSomeLove {
+    return Intl.message(
+      'Show Some Love',
+      name: 'showSomeLove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact Us`
+  String get contactUs {
+    return Intl.message(
+      'Contact Us',
+      name: 'contactUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Orders`
+  String get myOrders {
+    return Intl.message(
+      'My Orders',
+      name: 'myOrders',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `See All`
@@ -1811,10 +1858,10 @@ class S {
   }
 
   /// `Privacy and Term`
-  String get PrivacyAndTerm {
+  String get privacyAndTerm {
     return Intl.message(
       'Privacy and Term',
-      name: 'PrivacyAndTerm',
+      name: 'privacyAndTerm',
       desc: '',
       args: [],
     );
@@ -3571,40 +3618,40 @@ class S {
   }
 
   /// `Dutch`
-  String get Netherlands {
+  String get netherlands {
     return Intl.message(
       'Dutch',
-      name: 'Netherlands',
+      name: 'netherlands',
       desc: '',
       args: [],
     );
   }
 
   /// `Korean`
-  String get Korean {
+  String get korean {
     return Intl.message(
       'Korean',
-      name: 'Korean',
+      name: 'korean',
       desc: '',
       args: [],
     );
   }
 
   /// `Hindi`
-  String get India {
+  String get india {
     return Intl.message(
       'Hindi',
-      name: 'India',
+      name: 'india',
       desc: '',
       args: [],
     );
   }
 
   /// `Dutch`
-  String get Dutch {
+  String get dutch {
     return Intl.message(
       'Dutch',
-      name: 'Dutch',
+      name: 'dutch',
       desc: '',
       args: [],
     );
@@ -3711,30 +3758,30 @@ class S {
   }
 
   /// `Egypt`
-  String get Egypt {
+  String get egypt {
     return Intl.message(
       'Egypt',
-      name: 'Egypt',
+      name: 'egypt',
       desc: '',
       args: [],
     );
   }
 
   /// `The username or password is incorrect`
-  String get UserNameInCorrect {
+  String get userNameInCorrect {
     return Intl.message(
       'The username or password is incorrect',
-      name: 'UserNameInCorrect',
+      name: 'userNameInCorrect',
       desc: '',
       args: [],
     );
   }
 
   /// `Qty`
-  String get Qty {
+  String get qty {
     return Intl.message(
       'Qty',
-      name: 'Qty',
+      name: 'qty',
       desc: '',
       args: [],
     );
@@ -4641,10 +4688,10 @@ class S {
   }
 
   /// `Polish`
-  String get Polish {
+  String get polish {
     return Intl.message(
       'Polish',
-      name: 'Polish',
+      name: 'polish',
       desc: '',
       args: [],
     );
@@ -5680,26 +5727,6 @@ class S {
     );
   }
 
-  /// `Korean`
-  String get korean {
-    return Intl.message(
-      'Korean',
-      name: 'korean',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Dutch`
-  String get dutch {
-    return Intl.message(
-      'Dutch',
-      name: 'dutch',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Things You Might Love`
   String get relatedLayoutTitle {
     return Intl.message(
@@ -5731,10 +5758,10 @@ class S {
   }
 
   /// `Date descending`
-  String get DateDESC {
+  String get dateDESC {
     return Intl.message(
       'Date descending',
-      name: 'DateDESC',
+      name: 'dateDESC',
       desc: '',
       args: [],
     );
@@ -6181,10 +6208,10 @@ class S {
   }
 
   /// `Tamil`
-  String get Tamil {
+  String get tamil {
     return Intl.message(
       'Tamil',
-      name: 'Tamil',
+      name: 'tamil',
       desc: '',
       args: [],
     );

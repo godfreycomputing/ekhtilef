@@ -72,20 +72,20 @@ class HeaderView extends StatelessWidget {
                 ],
               ),
             ),
-            if (showSeeAll)
-              InkResponse(
-                onTap: callback,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    S.of(context).seeAll,
-                    style: Theme.of(context)
-                        .textTheme
-                        .caption!
-                        .copyWith(color: Theme.of(context).primaryColor),
-                  ),
-                ),
-              ),
+            // if (showSeeAll)
+            //   InkResponse(
+            //     onTap: callback,
+            //     child: Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: Text(
+            //         S.of(context).seeAll + "fdfsfsdsd",
+            //         style: Theme.of(context)
+            //             .textTheme
+            //             .caption!
+            //             .copyWith(color: Theme.of(context).primaryColor),
+            //       ),
+            //     ),
+            //   ),
           ],
         ),
       ),

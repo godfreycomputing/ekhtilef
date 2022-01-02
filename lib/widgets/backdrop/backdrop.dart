@@ -423,7 +423,7 @@ class _BackdropState extends State<Backdrop>
                     ),
                     _buildMenuItem(
                       CupertinoIcons.sort_up,
-                      S.of(context).DateDESC,
+                      S.of(context).dateDESC,
                       'desc',
                     ),
                   ],

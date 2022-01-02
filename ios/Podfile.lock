@@ -345,8 +345,6 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
-  - audio_manager (0.0.1):
-    - Flutter
   - audio_session (0.0.1):
     - Flutter
   - BoringSSL-GRPC (0.0.7):
@@ -651,7 +649,6 @@ PODS:
   - nanopb/encode (2.30908.0)
   - notification_permissions (0.4.4):
     - Flutter
-  - OneSignal (3.4.3)
   - onesignal_flutter (3.2.3):
     - Flutter
     - OneSignalXCFramework (= 3.7.0)
@@ -693,7 +690,6 @@ PODS:
 
 DEPENDENCIES:
   - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
-  - audio_manager (from `.symlinks/plugins/audio_manager/ios`)
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - devicelocale (from `.symlinks/plugins/devicelocale/ios`)
@@ -719,7 +715,6 @@ DEPENDENCIES:
   - maps_launcher (from `.symlinks/plugins/maps_launcher/ios`)
   - multi_image_picker2 (from `.symlinks/plugins/multi_image_picker2/ios`)
   - notification_permissions (from `.symlinks/plugins/notification_permissions/ios`)
-  - OneSignal (= 3.4.3)
   - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
@@ -773,7 +768,6 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
-    - OneSignal
     - OneSignalXCFramework
     - PromisesObjC
     - razorpay-pod
@@ -783,8 +777,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   app_tracking_transparency:
     :path: ".symlinks/plugins/app_tracking_transparency/ios"
-  audio_manager:
-    :path: ".symlinks/plugins/audio_manager/ios"
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
   cloud_firestore:
@@ -868,7 +860,6 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
-  audio_manager: 59466b2ea5552ebdcba8106796f09b9357ef12e0
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
@@ -928,7 +919,6 @@ SPEC CHECKSUMS:
   multi_image_picker2: f81a13124e7a2bc48e7d15ee539a5f8b9ff4d407
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   notification_permissions: b74860c2967c1579243a675e63cd55e0ae75cef7
-  OneSignal: e4dfb1912410f302dc9661ce98fc829f6c18ff6a
   onesignal_flutter: abfc75e8d08a0d9c977aacfab9454af58f4f4fcc
   OneSignalXCFramework: 974dc438d68910cf04f3c8ab034e0131d41438c1
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
@@ -949,6 +939,6 @@ SPEC CHECKSUMS:
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
   webview_flutter: 3603125dfd3bcbc9d8d418c3f80aeecf331c068b
 
-PODFILE CHECKSUM: b1f353791672241dc853b1372a89be9faec3f063
+PODFILE CHECKSUM: dd00dc0c23aaafb72e390e905041fd4e22c02d41
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

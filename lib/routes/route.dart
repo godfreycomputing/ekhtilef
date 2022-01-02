@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fstore/lib/feature/image_editer_pro/screen/image_editor_pro.dart';
 import 'package:inspireui/inspireui.dart' show AutoHideKeyboard, StoryWidget;
 import 'package:provider/provider.dart';
 
@@ -42,6 +43,7 @@ class Routes {
     RouteList.language: (context) => LanguageScreen(),
     RouteList.currencies: (context) => CurrenciesScreen(),
     RouteList.category: (context) => const CategoriesScreen(),
+    RouteList.tshirt: (context) => TShirtEditor(),
     RouteList.audioPlaylist: (context) =>
         Services().renderAudioPlaylistScreen(),
     // AudioPlaylistScreen(audioService: injector.get()),

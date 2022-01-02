@@ -21,8 +21,8 @@ class AppSetting {
 
   AppSetting({
     this.mainColor = '#3FC1BE',
-    this.fontFamily = 'Roboto',
-    this.fontHeader = 'Raleway',
+    this.fontFamily = 'Arb',
+    this.fontHeader = 'Arb',
     this.productListLayout = 'list',
     this.stickyHeader = false,
     this.showChat = true,

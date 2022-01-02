@@ -273,7 +273,8 @@ class ProductModel with ChangeNotifier {
 
         return FluxNavigate.push(MaterialPageRoute(
           settings: routeSetting,
-          builder: (context) => ProductsScreen(
+          builder: (context) {
+            return ProductsScreen(
             products: products,
             categoryId: categoryId,
             tagId: tagId,
@@ -287,8 +288,8 @@ class ProductModel with ChangeNotifier {
             showCountdown:
                 configCountdown! && (onSale ?? false) && showCountdown,
             countdownDuration: countdownDuration,
-          ),
-        ));
+          );}
+        ),forceRootNavigator: true);
       }
 
       /// clear old products

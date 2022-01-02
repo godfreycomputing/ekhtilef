@@ -1,0 +1,48 @@
+{
+  "Login": "تسجيل الدخول",
+  "label_sign_up": "إنشاء حساب جديد",
+  "label_confirm": "تأكيد",
+  "label_first_name": "الاسم الأول",
+  "label_last_name": "الاسم الأخير",
+  "label_phone": "رقم الموبايل",
+  "label_email": "البريد الإلكتروني",
+  "label_password": "كلمة المرور",
+  "label_confirm_password": "تأكيد كلمة المرور",
+  "label_or_u_can": "أو يمكنك",
+  "label_logout": "تسجيل الخروج",
+  "label_change_language": "تغيير اللغة",
+  "label_more": "المزيد",
+  "label_cancel": "إلغاء",
+  "label_change_to_email_or_phone": "تغيير الى إيميل/هاتف",
+
+
+
+
+  "error_password_short": "يجب أن تكون كلمة المرور مؤلفة من 8 محارف على الأقل",
+  "error_inValid_email": "البريد الإلكتروني غير صالح",
+  "error_inValid_name": "الاسم غير صالح",
+  "error_inValid_phone": "رقم الهاتف غير صالح, يجب أن يبدأ ب 09",
+  "error_confirm_password": "كلمة المرور غير مطابقة",
+  "error_connection_lost": "فقد الإتصال",
+  "error_oops": "اوبس !",
+  "error_sorry": "عذراً !",
+  "error_appears_that_connection_lost": "يبدو أن الإتصال فقد حالياً",
+  "error_confirm_code_length": "يجب ان يكون ركز التحقق مكون من 9 ارقام",
+
+
+  "error_connection": "يبدو أن هنالك مشكلة في إتصالك بالشبكة",
+  "error_internal_server": "حدث خطأ من جهة المخدم",
+  "error_forbidden_error": "عذراً, لست مخول لدخول هذه الصفحة.",
+  "error_Unauthorized_Error": "عذراً, ليس لديك الصلاحية لدخول هذه الصفحة.",
+  "error_BadRequest_Error": "الطلب غير صالح",
+  "error_NotFound_Error": "لا يوجد محتوى حالياً",
+  "error_general": "حصل خطأ غير متوقع",
+  "error_Timeout_Error": "إنتهت مدة الجلسة",
+
+  "btn_Rty_title": "إعادة المحاولة",
+
+
+  "close_app": "إغلاق التطبيق",
+  "try_again": "حاول مجدداً"
+
+}

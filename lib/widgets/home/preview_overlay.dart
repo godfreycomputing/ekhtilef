@@ -19,6 +19,7 @@ class PreviewOverlay extends StatefulWidget {
 class _PreviewOverlayState extends State<PreviewOverlay> {
   @override
   Widget build(BuildContext context) {
+    //print("BECHAaaa${widget.config}");
     bool isPreviewing = widget.config!['isPreviewing'] ?? false;
     const colorPreview = [
       Colors.deepOrange,

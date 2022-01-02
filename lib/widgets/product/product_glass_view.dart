@@ -482,7 +482,7 @@ class ProductGlass extends StatelessWidget {
           horizontal: 10,
         ),
         child: Text(
-          item.name!,
+          item.name! ,
           style: Theme.of(context)
               .textTheme
               .headline5!

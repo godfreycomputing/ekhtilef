@@ -99,7 +99,7 @@ class _HorizontalSliderListState extends State<HorizontalSliderList> {
         return Column(
           children: <Widget>[
             HeaderView(
-              headerText: widget.config!['name'] ?? ' ',
+              headerText: widget.config!['name']  ?? ' ',
               showSeeAll: isRecent ? false : true,
               verticalMargin: 4,
               callback: () => FluxNavigate.pushNamed(

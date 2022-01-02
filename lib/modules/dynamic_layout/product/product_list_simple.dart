@@ -32,7 +32,7 @@ class SimpleVerticalProductList extends StatelessWidget {
       waiting: Column(
         children: <Widget>[
           HeaderView(
-            headerText: config.name ?? '',
+            headerText: config.name! , // ?? '',
             showSeeAll: true,
             callback: () =>
                 ProductModel.showList(context: context, config: config),
@@ -54,7 +54,7 @@ class SimpleVerticalProductList extends StatelessWidget {
       child: ({maxWidth, products}) => Column(
         children: <Widget>[
           HeaderView(
-            headerText: config.name ?? '',
+            headerText: config.name! , // ?? '', ?? '',
             showSeeAll: true,
             callback: () => ProductModel.showList(
               context: context,

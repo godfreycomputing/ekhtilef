@@ -26,7 +26,7 @@ class _HalfSizeLayoutState extends State<HalfSizeLayout>
   Map<String, String> mapAttribute = HashMap();
   late final PageController _pageController = PageController();
   late final RubberAnimationController _controller;
-  final ScrollController _scrollController = ScrollController();
+  //final ScrollController _scrollController = ScrollController();
 
   var top = 0.0;
   var opacityValue = 0.9;
@@ -64,7 +64,7 @@ class _HalfSizeLayoutState extends State<HalfSizeLayout>
         //     controller: _scrollController,
         //     //physics: const NeverScrollableScrollPhysics(),
         child: Container(
-      height: 400,
+      height: MediaQuery.of(context).size.height * .58,
       child: Stack(
         children: <Widget>[
           if (widget.product?.imageFeature != null)
@@ -224,6 +224,7 @@ class _HalfSizeLayoutState extends State<HalfSizeLayout>
                     /** image index indicator*/
                     ProductTitle(widget.product),
                     ProductDescription(widget.product),
+                    
                     //ProductVariant(widget.product),
                     //RelatedProduct(widget.product),
                     // const SizedBox(
@@ -246,8 +247,7 @@ class _HalfSizeLayoutState extends State<HalfSizeLayout>
       // floatingActionButton: ProductVariant(widget.product),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
       body: SingleChildScrollView(
-        child: Expanded(
-            child: Column(children: [
+        child:  Column(children: [
           // Align(
           //   alignment: FractionalOffset.topCenter,
           //   child:ProductVariant(widget.product)),
@@ -261,7 +261,7 @@ class _HalfSizeLayoutState extends State<HalfSizeLayout>
           /// animationController: _controller,
           //scrollController: _scrollController,
         ])),
-      ),
+      
       floatingActionButton: bottomSheet(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

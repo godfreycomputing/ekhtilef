@@ -64,7 +64,7 @@ class ProductList extends StatelessWidget {
                 ),
               ),
             HeaderView(
-              headerText: config.name ?? '',
+              headerText: config.name ! , // ?? '',?? '',
               showSeeAll: _isRecentLayout ? false : true,
               verticalMargin: config.image != null ? 6.0 : 10.0,
               callback: () => ProductModel.showList(
