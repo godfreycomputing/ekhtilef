@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:screenshot/screenshot.dart';
 
-import '../../../../feature/image_editer_pro/bloc/image_editor_step_bloc.dart';
 import '../bloc/image_editor_step_bloc.dart';
 import 'box_image_clipper.dart';
 

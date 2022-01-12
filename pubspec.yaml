@@ -134,7 +134,7 @@ dependencies:
   intro_slider: ^3.0.2
   #audio_manager: ^0.8.1
   flutter_calendar_carousel: 2.0.3
-  flutter_bloc: #^6.0.6
+  flutter_bloc: 7.2.0 #^6.0.6
   # Service Locator
   #get_it: ^5.0.1
   # Functional programming in Dart
@@ -144,7 +144,7 @@ dependencies:
   #  Http client for Dart
   dio: #^3.0.10
   # compare objects
-  equatable: 2.0.0
+  equatable: ^2.0.3
   # adapting screen and font size
   flutter_screenutil: 5.0.0
   # scroll component drop-down refresh

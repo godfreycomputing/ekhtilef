@@ -1,24 +1,43 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'dart:math' show cos, sqrt, asin;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../services/index.dart' show Config;
 import '../config.dart' show kAdvanceConfig;
-import '../constants.dart' show isMobile, kIsWeb, printLog;
+import '../constants.dart' show httpGet, isMobile, kIsWeb, printLog;
 
 class Tools {
   static double? formatDouble(num? value) => value == null ? null : value * 1.0;
 
+  static Future<File?> urlToFile(String imageUrl) async {
+    try{
+      var rng = Random();
+      var tempDir = await getTemporaryDirectory();
+      var tempPath = tempDir.path;
+      var file = File(tempPath + (rng.nextInt(100)).toString() + '.png');
+      var response = await httpGet(Uri.parse(imageUrl));
+      await file.writeAsBytes(response.bodyBytes);
+      return file;
+    }catch(e, st){
+      printLog('$e-------------$st'); 
+      return null; 
+    }
+  }
+
   /// check tablet screen
+
   static bool isTablet(MediaQueryData query) {
     if (Config().isBuilder) {
       return false;

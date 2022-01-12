@@ -134,7 +134,7 @@ class _TShirtEditorState extends State<TShirtEditor> {
           body: Center(
             child: Screenshot(
               controller: screenshotController,
-              key: _containerKey,
+              key: GlobalKey(),
               child: BlocBuilder(
                   bloc: _imageEditorStepBloc,
                   buildWhen: (c, p) => c != p,
@@ -146,7 +146,7 @@ class _TShirtEditorState extends State<TShirtEditor> {
                     // }
                     if (state is InsertImageState) {
                       return SizedBox(
-                        key: _containerKey,
+                        key: GlobalKey(),
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
                         child: Stack(
@@ -187,7 +187,7 @@ class _TShirtEditorState extends State<TShirtEditor> {
                     }
                     if (state is StickerImageState) {
                       return SizedBox(
-                        key: _containerKey,
+                        key: GlobalKey(),
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
                         child: Stack(
@@ -258,7 +258,7 @@ class _TShirtEditorState extends State<TShirtEditor> {
                     }
                     if (state is PaintImageState) {
                       return SizedBox(
-                        key: _containerKey,
+                        key: GlobalKey(),
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
                         child: Stack(
@@ -313,7 +313,7 @@ class _TShirtEditorState extends State<TShirtEditor> {
                         textFocusNode.unfocus();
                       }
                       return SizedBox(
-                        key: _containerKey,
+                        key: GlobalKey(),
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
                         child: Stack(
@@ -420,7 +420,7 @@ class _TShirtEditorState extends State<TShirtEditor> {
                     }
                     if (state is EmojiImageState) {
                       return SizedBox(
-                        key: _containerKey,
+                        key: GlobalKey(),
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
                         child: Stack(

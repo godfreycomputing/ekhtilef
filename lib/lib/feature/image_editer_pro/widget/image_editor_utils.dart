@@ -1,12 +1,15 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fstore/common/tools/tools.dart';
 import 'package:fstore/lib/feature/image_editer_pro/bloc/image_editor_step_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fstore/lib/feature/image_editer_pro/bloc/image_editor_step_bloc.dart';
+import 'package:inspireui/utils/logs.dart';
 
 class ImageEditorUtils {
   final path;
@@ -77,40 +80,25 @@ class ImageEditorUtils {
                                   Navigator.pop(context);
                                 }
                               } else {
-                                final pickedFile =
-                                    (await NetworkAssetBundle(Uri.parse(path))
-                                            .load(path))
-                                        .buffer
-                                        .asUint8List();
-                                var yourVar = path;
-                                final callback =
-                                    (bytes, {cacheWidth, cacheHeight}) {
-                                  yourVar = bytes.buffer.asUint8List();
-                                  return instantiateImageCodec(bytes,
-                                      targetWidth: cacheWidth,
-                                      targetHeight: cacheHeight);
-                                } as DecoderCallback;
-                                ImageProvider provider = NetworkImage(path);
-                                await provider
-                                    .obtainKey(
-                                        createLocalImageConfiguration(context))
-                                    .then((key) {
-                                  provider.load(key, callback);
+                                await Tools.urlToFile(path)
+                                    .then((pickedFile) async {
+                                 
+                                    //printLog('$pickedFile');
+                                    //await imagePicker.getImage(source: ImageSource.values,imageQuality: 100);
+                                    
+                                      var decodedImage =
+                                          await decodeImageFromList(
+                                              pickedFile!.readAsBytesSync());
+                                      // _controller.clear();
+                                      imageEditorStepBloc.add(event(
+                                        pickedFile,
+                                        decodedImage.height,
+                                        decodedImage.width,
+                                      ));
+                                      Navigator.pop(context);
+                                    
+                                  
                                 });
-                                //final pickedFile = path;//await imagePicker.getImage(source: ImageSource.values,imageQuality: 100);
-                                if (pickedFile != null) {
-                                  final _imageFromPicker =
-                                      File.fromRawPath(pickedFile);
-                                  var decodedImage = await decodeImageFromList(
-                                      _imageFromPicker.readAsBytesSync());
-                                  // _controller.clear();
-                                  imageEditorStepBloc.add(event(
-                                    _imageFromPicker,
-                                    decodedImage.height,
-                                    decodedImage.width,
-                                  ));
-                                  Navigator.pop(context);
-                                }
                               }
                             }),
                         const SizedBox(width: 10),
