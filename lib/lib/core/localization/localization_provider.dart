@@ -8,7 +8,7 @@ class AppConfigProvider extends ChangeNotifier {
 
   /// Get current Locale supported
   Locale get appLocal => _appLocale;
-  Future<dynamic> fetchLocale() async {
+  fetchLocale() async {
     var prefs = await SpUtil.getInstance();
     /// check if the application is first start or not
     if(prefs.getBool(KEY_FIRST_START) == null){
@@ -16,7 +16,7 @@ class AppConfigProvider extends ChangeNotifier {
       await prefs.putBool(KEY_FIRST_START, true);
     }
     if (prefs.getString(KEY_LANGUAGE) == null) {
-      _appLocale = const Locale(LANG_EN);
+      _appLocale = Locale(LANG_EN);
       await prefs.putString(KEY_LANGUAGE, LANG_EN);
       return Null;
     }

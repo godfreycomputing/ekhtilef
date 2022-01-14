@@ -1,9 +1,9 @@
 import 'base_error.dart';
 
 class CustomError extends BaseError {
-  final String message;
+  final String? message;
 
-  CustomError({required this.message});
+  CustomError({this.message});
 
   @override
   List<Object> get props => [];

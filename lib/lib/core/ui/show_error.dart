@@ -23,12 +23,12 @@ import 'show_dialog.dart';
 class ShowError {
   static void showErrorSnakBar(BuildContext context,BaseError error,dynamic state){
     if (error is ErrorMessageModel){
-      ShowError.showCustomError(context, error.message);
+      ShowError.showCustomError(context, error.message!);
     }
     else if(error.runtimeType is ConnectionError || error is ConnectionError) {
       ShowError.showConnectionError(context, state.callback);
     } else if (error is CustomError) {
-      ShowError.showCustomError(context, error.message);
+      ShowError.showCustomError(context, error.message!);
     } else if (error is UnauthorizedError) {
       ShowError.showUnauthorizedError(context);
     }

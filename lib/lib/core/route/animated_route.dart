@@ -2,9 +2,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedRoute extends PageRouteBuilder {
-  final Widget page;
+  final Widget? page;
 
-  AnimatedRoute({required this.page})
+  AnimatedRoute({this.page})
       : super(
           pageBuilder: (context, animation, secondaryAnimation) {
             return ListenableProvider(

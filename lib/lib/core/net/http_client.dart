@@ -11,23 +11,26 @@ import '../errors/conflict_error.dart';
 import '../errors/forbidden_error.dart';
 import '../errors/format_error.dart';
 import '../errors/http_error.dart';
+import '../errors/internal_server_error.dart';
+import '../errors/net_error.dart';
 import '../errors/not_found_error.dart';
 import '../errors/socket_error.dart';
 import '../errors/timeout_error.dart';
 import '../errors/unauthorized_error.dart';
 import '../errors/unknown_error.dart';
+import '../model/error_message_model.dart';
 import 'api_url.dart';
 import 'http_method.dart';
 import 'package:http_parser/http_parser.dart';
 
 
 class HttpClient{
-  late Dio _client;
+  Dio? _client;
 
-  Dio get instance => _client;
+  Dio get instance => _client!;
 
   HttpClient() {
-    var _options = BaseOptions(
+    BaseOptions _options = BaseOptions(
       connectTimeout: 15000,
       receiveTimeout: 15000,
       sendTimeout: 10000,
@@ -40,10 +43,10 @@ class HttpClient{
   Future<Either<BaseError, T>> sendRequest<T,E>({
     required HttpMethod method,
     required String url,
-    required Map<String, String> headers,
-    required Map<String, dynamic> queryParameters,
-    required Map<String, dynamic> body,
-    required CancelToken cancelToken,
+    Map<String, String>? headers,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? body,
+    CancelToken? cancelToken,
   }) async {
     assert(method != null);
     assert(url != null);
@@ -52,7 +55,7 @@ class HttpClient{
     try {
       switch (method) {
         case HttpMethod.GET:
-          response = await _client.get(
+          response = await _client!.get(
             url,
             queryParameters: queryParameters,
             options: Options(headers: headers),
@@ -60,7 +63,7 @@ class HttpClient{
           );
           break;
         case HttpMethod.POST:
-          response = await _client.post(
+          response = await _client!.post(
             url,
             data: body,
             queryParameters: queryParameters,
@@ -69,7 +72,7 @@ class HttpClient{
           );
           break;
         case HttpMethod.PUT:
-          response = await _client.put(
+          response = await _client!.put(
             url,
             data: body,
             queryParameters: queryParameters,
@@ -78,7 +81,7 @@ class HttpClient{
           );
           break;
         case HttpMethod.DELETE:
-          response = await _client.delete(
+          response = await _client!.delete(
             url,
             data: body,
             queryParameters: queryParameters,
@@ -89,9 +92,9 @@ class HttpClient{
       }
       try {
           // Get the decoded json
-        if (response.data is String) {
+        if (response.data is String)
           return Right(json.decode(response.data) as T);
-        } else{
+        else{
           return Right(response.data as T);
         }
       } on FormatException catch(e) {
@@ -118,17 +121,17 @@ class HttpClient{
     required String fileKey,
     required String filePath,
     required String fileName,
-    required MediaType mediaType,
-    required Map<String, dynamic> data,
-    required Map<String, String> headers,
-    required ProgressCallback onSendProgress,
-    required ProgressCallback onReceiveProgress,
-    required CancelToken cancelToken,
+    MediaType? mediaType,
+    Map<String, dynamic>? data,
+    Map<String, String>? headers,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+    CancelToken? cancelToken,
   }) async {
     assert(url != null);
     assert(fileKey != null);
 
-    var dataMap = <String, dynamic>{};
+    Map<String, dynamic> dataMap = {};
     if (data != null) {
       dataMap.addAll(data);
     }
@@ -137,12 +140,12 @@ class HttpClient{
         fileKey: await MultipartFile.fromFile(
           filePath,
           filename: fileName,
-          contentType: mediaType,
+          contentType: mediaType ?? MediaType("image", "jpeg"),
         )
       });
     }
     try {
-      final response = await _client.post(
+      final response = await _client!.post(
         url,
         data: FormData.fromMap(dataMap),
         onSendProgress: onSendProgress,
@@ -153,9 +156,9 @@ class HttpClient{
 
       try {
         // Get the decoded json
-        if (response.data is String) {
+        if (response.data is String)
           return Right(json.decode(response.data) as T);
-        } else{
+        else{
           return Right(response.data as T);
         }
       } on FormatException catch(e) {
@@ -180,6 +183,8 @@ class HttpClient{
   }
 
   BaseError _handleDioError<E>(DioError error) {
+    
+      if (error.error is SocketException) return SocketError();
       if (error.type == DioErrorType.response) {
         switch (error.response!.statusCode) {
           case 400:
@@ -192,29 +197,27 @@ class HttpClient{
             return NotFoundError();
           case 409:
             return ConflictError();
-          // case 500:
-          //   if(error.response!.data == null &&
-          //       error.response!.data["data"] == null &&
-          //       error.response!.data["message"] == null)
-          //     {
-          //       return InternalServerError();
-          //     }
-            //  else
-            //    return ErrorMessageModel<E>.fromMap(error.response.data);
-            //  break;
+          case 500:
+            if(error.response!.data == null &&
+                error.response!.data["data"] == null &&
+                error.response!.data["message"] == null)
+              {
+                return InternalServerError();
+              }
+             else
+               return ErrorMessageModel<E>.fromMap(error.response!.data);
+             break;
           default:
             return HttpError();
         }
       
-      //return NetError();
     } else if (error.type == DioErrorType.connectTimeout ||
         error.type == DioErrorType.sendTimeout ||
         error.type == DioErrorType.receiveTimeout) {
       return TimeoutError();
     } else if (error.type == DioErrorType.cancel) {
       return CancelError();
-    } else {
+    } else
       return UnknownError();
-    }
   }
 }

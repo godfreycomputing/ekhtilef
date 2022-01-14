@@ -11,6 +11,7 @@ import 'package:html/parser.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -22,17 +23,20 @@ class Tools {
   static double? formatDouble(num? value) => value == null ? null : value * 1.0;
 
   static Future<File?> urlToFile(String imageUrl) async {
-    try{
-      var rng = Random();
-      var tempDir = await getTemporaryDirectory();
-      var tempPath = tempDir.path;
-      var file = File(tempPath + (rng.nextInt(100)).toString() + '.png');
-      var response = await httpGet(Uri.parse(imageUrl));
-      await file.writeAsBytes(response.bodyBytes);
-      return file;
-    }catch(e, st){
-      printLog('$e-------------$st'); 
-      return null; 
+    try {
+      var result = await Permission.storage.request();
+      if (result == PermissionStatus.granted) {
+        var rng = Random();
+        var tempDir = await getTemporaryDirectory();
+        var tempPath = tempDir.path;
+        var file = File(tempPath + (rng.nextInt(100)).toString() + '.png');
+        var response = await httpGet(Uri.parse(imageUrl));
+        await file.writeAsBytes(response.bodyBytes);
+        return file;
+      }
+    } catch (e, st) {
+      printLog('$e-------------$st');
+      return null;
     }
   }
 

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-
 import '../../../core/common/app_colors.dart';
 import '../../../core/common/dimens.dart';
 import '../../../core/common/gaps.dart';
 import '../bloc/image_editor_step_bloc.dart';
+
 import 'image_editor_utils.dart';
 
 class ImageEditorFirstStepInitialAddImageWidget extends StatefulWidget {
   final ImageEditorStepBloc imageEditorStepBloc;
-  final String? path;
+  final String path;
 
   const ImageEditorFirstStepInitialAddImageWidget({Key? key, required this.imageEditorStepBloc, required this.path}) : super(key: key);
   @override
@@ -23,6 +23,11 @@ class _ImageEditorFirstStepInitialAddImageWidgetState extends State<ImageEditorF
     utils = ImageEditorUtils(
         context: context, imageEditorStepBloc: widget.imageEditorStepBloc, path: widget.path);
     super.initState();
+  }
+
+  @override 
+  void dispose(){
+    super.dispose();
   }
 
   @override
@@ -59,9 +64,9 @@ class _ImageEditorFirstStepInitialAddImageWidgetState extends State<ImageEditorF
                   .size
                   .width / 3,
             ),
-            //Gaps.vGap32,
-            const Text(
-              'Tap anywhere to open a photo',
+            Gaps.vGap32,
+            Text(
+              "Tap anywhere to open a photo",
               style: TextStyle(
                   color: AppColors.primaryColorDark,
                   fontWeight: FontWeight.bold,

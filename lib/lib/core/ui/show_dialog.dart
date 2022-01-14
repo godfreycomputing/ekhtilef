@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ShowDialog {
-  Future<dynamic> showTransparentDialog<T>({
+  Future<T?> showTransparentDialog<T>({
     required BuildContext context,
     bool barrierDismissible = true,
-    required WidgetBuilder builder,
+    WidgetBuilder? builder,
   }) {
-    final  theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
     return showGeneralDialog(
       context: context,
       pageBuilder: (BuildContext buildContext, Animation<double> animation,
           Animation<double> secondaryAnimation) {
-        final Widget pageChild = Builder(builder: builder);
+        final Widget pageChild = Builder(builder: builder!);
         return SafeArea(
           child: Builder(builder: (BuildContext context) {
             return theme != null
@@ -42,17 +42,17 @@ class ShowDialog {
     );
   }
 
-  Future<dynamic> showElasticDialog<T>({
+  Future<T?> showElasticDialog<T>({
     required BuildContext context,
     bool barrierDismissible = true,
-    required WidgetBuilder builder,
+    WidgetBuilder? builder,
   }) {
     final ThemeData theme = Theme.of(context);
     return showGeneralDialog(
       context: context,
       pageBuilder: (BuildContext buildContext, Animation<double> animation,
           Animation<double> secondaryAnimation) {
-        final Widget pageChild = Builder(builder: builder);
+        final Widget pageChild = Builder(builder: builder!);
         return SafeArea(
           child: Builder(builder: (BuildContext context) {
             return theme != null

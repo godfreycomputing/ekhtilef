@@ -19,7 +19,7 @@ class Gaps {
   static Widget vGap12 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp12));
   static Widget vGap15 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp15));
   static Widget vGap16 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp16));
-  static Widget vGap24 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp24));
+  static Widget vGap24 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp4));
   static Widget vGap32 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp24));
   static Widget vGap50 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp50));
   static Widget vGap64 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp64));
@@ -27,13 +27,13 @@ class Gaps {
   static Widget vGap256 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp256));
 
 
-  static const Widget line = Divider();
+  static const Widget line = const Divider();
 
   static const Widget vLine = SizedBox(
     width: 0.6,
     height: 24.0,
-    child: VerticalDivider(),
+    child: const VerticalDivider(),
   );
 
-  static const Widget empty = SizedBox.shrink();
+  static const Widget empty = const SizedBox.shrink();
 }

@@ -343,7 +343,7 @@ mixin ProductVariantMixin {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                         TShirtEditor(path: product.imageFeature)
+                         TShirtEditor(path: product.imageFeature!)
                         ));
           }, //isAvailable ? () => addToCart(true, inStock) : null,
           child: buyOrOutOfStockButton,

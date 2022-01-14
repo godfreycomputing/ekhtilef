@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'animated_route.dart';
+import 'fade_route.dart';
 
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
+    final args = settings.arguments;
     switch (settings.name) {
       // case LoginScreen.routeName:
       //   return FadeRoute(page: LoginScreen());
@@ -21,9 +24,9 @@ class RouteGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Errorx'),
+          title: Text('Error'),
         ),
-        body: const Center(
+        body: Center(
           child: Text('ERROR'),
         ),
       );

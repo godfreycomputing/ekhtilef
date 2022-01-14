@@ -15,8 +15,8 @@ fieldFocusChange(
   FocusScope.of(context).requestFocus(nextFocus);
 }
 /// This for unFocus nodes
-unFocusList({required List<FocusNode> focus}){
-  focus.forEach((element) {element.unfocus();});
+unFocusList({@required List<FocusNode>? focus}){
+  focus!.forEach((element) {element.unfocus();});
 }
 
 launchURL(String url) async {

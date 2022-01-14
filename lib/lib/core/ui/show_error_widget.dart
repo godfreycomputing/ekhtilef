@@ -16,7 +16,7 @@ import 'show_error.dart';
 class ShowErrorWidget extends StatelessWidget {
   final dynamic state;
 
-  const ShowErrorWidget({Key? key, this.state}) : super(key: key);
+  ShowErrorWidget({Key? key, this.state}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final error = state.error;
@@ -28,7 +28,7 @@ class ShowErrorWidget extends StatelessWidget {
       }
       // Custom Error
       else if (error is CustomError) {
-        return CustomErrorScreenWidget(message: error.message, callback: () {  },);
+        return CustomErrorScreenWidget(message: error.message!);
       }
       // Unauthorized Error
       else if (error is UnauthorizedError) {
@@ -42,7 +42,7 @@ class ShowErrorWidget extends StatelessWidget {
       }
       // Bad Request Error
       else if (error is BadRequestError) {
-        return  BadRequestErrorScreenWidget(message: '',);
+        return BadRequestErrorScreenWidget();
       }
       // Forbidden Error
       else if (error is ForbiddenError) {
@@ -88,11 +88,11 @@ class ConnectionErrorScreenWidget extends StatelessWidget {
           Gaps.vGap32,
           RaisedButton(
             onPressed: callback,
-            color: Theme.of(context).accentColor,
             child: Text(
               Translations.of(context)!.translate('btn_Rty_title'),
-              style: const TextStyle(fontSize: 12.5, color: Colors.white),
+              style: TextStyle(fontSize: 12.5, color: Colors.white),
             ),
+            color: Theme.of(context).accentColor,
           ),
         ],
       ),
@@ -127,11 +127,11 @@ class InternalServerErrorScreenWidget extends StatelessWidget {
           Gaps.vGap32,
           RaisedButton(
             onPressed: callback,
-            color: Theme.of(context).accentColor,
             child: Text(
               Translations.of(context)!.translate('btn_Rty_title'),
-              style: const TextStyle(fontSize: 12.5, color: Colors.white),
+              style: TextStyle(fontSize: 12.5, color: Colors.white),
             ),
+            color: Theme.of(context).accentColor,
           ),
         ],
       ),
@@ -153,8 +153,8 @@ class ForbiddenErrorScreenWidget extends StatelessWidget {
 }
 
 class BadRequestErrorScreenWidget extends StatelessWidget {
-  final String message;
-  const BadRequestErrorScreenWidget({Key? key, required this.message})
+  final String? message;
+  const BadRequestErrorScreenWidget({Key? key, this.message})
       : super(key: key);
 
   @override
@@ -169,8 +169,9 @@ class BadRequestErrorScreenWidget extends StatelessWidget {
               scale: 2.5,
           ),
           Gaps.vGap32,
-          Text(message,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          Text(message??
+              Translations.of(context)!.translate('error_BadRequest_Error'),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -198,16 +199,16 @@ class NotFoundErrorScreenWidget extends StatelessWidget {
           Gaps.vGap32,
           Text(
             Translations.of(context)!.translate('error_NotFound_Error'),
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           Gaps.vGap32,
           RaisedButton(
             onPressed: callback,
-            color: Theme.of(context).accentColor,
             child: Text(
               Translations.of(context)!.translate('btn_Rty_title'),
-              style: const TextStyle(fontSize: 12.5, color: Colors.white),
+              style: TextStyle(fontSize: 12.5, color: Colors.white),
             ),
+            color: Theme.of(context).accentColor,
           ),
         ],
       ),
@@ -230,10 +231,10 @@ class UnauthorizedErrorScreenWidget extends StatelessWidget {
 
 class CustomErrorScreenWidget extends StatelessWidget {
   final String message;
-  final VoidCallback callback;
+  final VoidCallback? callback;
   const CustomErrorScreenWidget({
     Key? key,
-    required this.message,required  this.callback,
+    required this.message, this.callback,
   })  : assert(message != null),
         super(key: key);
 
@@ -251,17 +252,17 @@ class CustomErrorScreenWidget extends StatelessWidget {
           Gaps.vGap32,
           Text(
             message,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           Gaps.vGap32,
           callback==null?Container():
           RaisedButton(
             onPressed: callback,
-            color: Theme.of(context).accentColor,
             child: Text(
               Translations.of(context)!.translate('btn_Rty_title'),
-              style: const TextStyle(fontSize: 12.5, color: Colors.white),
+              style: TextStyle(fontSize: 12.5, color: Colors.white),
             ),
+            color: Theme.of(context).accentColor,
           ),
         ],
       ),
@@ -291,16 +292,16 @@ class UnexpectedErrorScreenWidget extends StatelessWidget {
           Gaps.vGap32,
           Text(
             Translations.of(context)!.translate('error_general'),
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           Gaps.vGap32,
           RaisedButton(
             onPressed: callback,
-            color: Theme.of(context).accentColor,
             child: Text(
               Translations.of(context)!.translate('btn_Rty_title'),
-              style: const TextStyle(fontSize: 12.5, color: Colors.white),
+              style: TextStyle(fontSize: 12.5, color: Colors.white),
             ),
+            color: Theme.of(context).accentColor,
           ),
         ],
       ),
@@ -331,16 +332,16 @@ class TimeoutErrorScreenWidget extends StatelessWidget {
           Gaps.vGap32,
           Text(
             Translations.of(context)!.translate('error_Timeout_Error'),
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           Gaps.vGap32,
           RaisedButton(
             onPressed: callback,
-            color: Theme.of(context).accentColor,
             child: Text(
               Translations.of(context)!.translate('btn_Rty_title'),
-              style: const TextStyle(fontSize: 12.5, color: Colors.white),
+              style: TextStyle(fontSize: 12.5, color: Colors.white),
             ),
+            color: Theme.of(context).accentColor,
           ),
         ],
       ),

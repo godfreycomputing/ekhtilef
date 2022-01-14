@@ -17,7 +17,7 @@ class SpUtil {
 
   static Future<SpUtil> getInstance() async {
     if (_instance == null) {
-      _instance = SpUtil._();
+      _instance = new SpUtil._();
       await _instance!._init();
     }
     return _instance!;
@@ -31,12 +31,12 @@ class SpUtil {
   }
 
   bool hasKey(String key) {
-    Set keys = getKeys();
-    return keys.contains(key);
+    Set<String>? keys = getKeys();
+    return keys!.contains(key);
   }
 
-  Set<String> getKeys() {
-    if (_beforeCheck()) return Set();
+  Set<String>? getKeys() {
+    if (_beforeCheck()) return null;
     return _spf!.getKeys();
   }
 

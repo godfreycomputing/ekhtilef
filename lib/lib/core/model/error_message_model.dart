@@ -7,35 +7,35 @@ import '../errors/base_error.dart';
 
 class ErrorMessageModel<E> extends BaseError{
   ErrorMessageModel({
-    required this.data,
-    required this.errorCode,
-    required this.message,
-    required this.messages,
+    this.data,
+    this.errorCode,
+    this.message,
+    this.messages,
   });
 
-  final E data;
-  final int errorCode;
-  final String message;
-  final List<String> messages;
+  final E? data;
+  final int? errorCode;
+  final String? message;
+  final List<String>? messages;
 
   factory ErrorMessageModel.fromJson(String str) => ErrorMessageModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory ErrorMessageModel.fromMap(Map<String, dynamic> json) => ErrorMessageModel(
-    data: json['data'],
-    errorCode: json['errorCode'] ,
-    message: json['message'] ,
-    messages: List<String>.from(json['messages'].map((x) => x)),
+    data: json["data"] == null ? null : json["data"],
+    errorCode: json["errorCode"] == null ? null : json["errorCode"],
+    message: json["message"] == null ? null : json["message"],
+    messages: json["messages"] == null ? null : List<String>.from(json["messages"].map((x) => x)),
   );
 
   Map<String, dynamic> toMap() => {
-    'data': data,
-    'errorCode': errorCode ,
-    'message': message ,
-    'messages': messages == null ? null : List<dynamic>.from(messages.map((x) => x)),
+    "data": data,
+    "errorCode": errorCode == null ? null : errorCode,
+    "message": message == null ? null : message,
+    "messages": messages == null ? null : List<dynamic>.from(messages!.map((x) => x)),
   };
 
   @override
-  List<Object> get props => [errorCode,message,messages];
+  List<Object> get props => [errorCode!,message!,messages!];
 }

@@ -37,10 +37,10 @@ class BarColorPicker extends StatefulWidget {
   final double cornerRadius;
 
   /// specifies the bar orientation
-   final bool horizontal;
+  final bool horizontal;
 
   /// thumb fill color
-  final Color? thumbColor;
+  final Color thumbColor;
 
   /// radius of thumb
   final double thumbRadius;
@@ -48,8 +48,8 @@ class BarColorPicker extends StatefulWidget {
   /// initial color of this color picker.
   final Color initialColor;
 
-  const BarColorPicker({
-    Key?  key,
+  BarColorPicker({
+    Key? key,
     this.pickMode = PickMode.Color,
     this.horizontal = true,
     this.width = 200,
@@ -58,7 +58,12 @@ class BarColorPicker extends StatefulWidget {
     this.initialColor = const Color(0xffff0000),
     this.thumbColor = Colors.black,
     required this.colorListener,
-  })  : 
+  })  : assert(pickMode != null),
+        assert(horizontal != null),
+        assert(width != null),
+        assert(cornerRadius != null),
+        assert(colorListener != null),
+        assert(initialColor != null),
         super(key: key);
 
   @override
@@ -101,10 +106,10 @@ class _BarColorPickerState extends State<BarColorPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final thumbRadius = widget.thumbRadius;
-    final horizontal = widget.horizontal;
+    final double thumbRadius = widget.thumbRadius;
+    final bool horizontal = widget.horizontal;
 
-    double thumbLeft = 0, thumbTop = 0;
+    double? thumbLeft, thumbTop;
     if (horizontal) {
       thumbLeft = barWidth * percent;
     } else {
@@ -118,7 +123,7 @@ class _BarColorPickerState extends State<BarColorPicker> {
           width: thumbRadius * 2,
           height: thumbRadius * 2,
           decoration: BoxDecoration(
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   color: _kThumbShadowColor,
                   spreadRadius: 2,
@@ -178,8 +183,8 @@ class _BarColorPickerState extends State<BarColorPicker> {
 
   /// calculate colors picked from palette and update our states.
   void handleTouch(Offset globalPosition, BuildContext context) {
-    var box = context.findRenderObject() as RenderBox;
-    var localPosition = box.globalToLocal(globalPosition);
+    RenderBox box = context.findRenderObject() as RenderBox;
+    Offset localPosition = box.globalToLocal(globalPosition);
     double percent;
     if (widget.horizontal) {
       percent = (localPosition.dx - widget.thumbRadius) / barWidth;
@@ -192,11 +197,11 @@ class _BarColorPickerState extends State<BarColorPicker> {
     });
     switch (widget.pickMode) {
       case PickMode.Color:
-        var color = HSVColor.fromAHSV(1.0, percent * 360, 1.0, 1.0).toColor();
+        Color color = HSVColor.fromAHSV(1.0, percent * 360, 1.0, 1.0).toColor();
         widget.colorListener(color.value);
         break;
       case PickMode.Grey:
-        final channel = (0xff * percent).toInt();
+        final int channel = (0xff * percent).toInt();
         widget.colorListener(
             Color.fromARGB(0xff, channel, channel, channel).value);
         break;
@@ -222,7 +227,7 @@ class CircleColorPicker extends StatefulWidget {
   /// initial color of this color picker.
   final Color initialColor;
 
-  const CircleColorPicker(
+  CircleColorPicker(
       {Key? key,
       this.radius = 120,
       this.initialColor = const Color(0xffff0000),
@@ -251,27 +256,27 @@ class _CircleColorPickerState extends State<CircleColorPicker> {
     Color(0xffff0000)
   ];
 
-  late double thumbDistanceToCenter;
-  late double thumbRadians;
+  double? thumbDistanceToCenter;
+  double? thumbRadians;
 
   @override
   void initState() {
     super.initState();
     thumbDistanceToCenter = widget.radius;
-    final hue = HSVColor.fromColor(widget.initialColor).hue;
+    final double hue = HSVColor.fromColor(widget.initialColor).hue;
     thumbRadians = degreesToRadians(270 - hue);
   }
 
   @override
   Widget build(BuildContext context) {
-    final  radius = widget.radius;
-    final  thumbRadius = widget.thumbRadius;
+    final double radius = widget.radius;
+    final double thumbRadius = widget.thumbRadius;
 
     // compute thumb center coordinate
-    final  thumbCenterX =
-        radius + thumbDistanceToCenter * sin(thumbRadians);
-    final  thumbCenterY =
-        radius + thumbDistanceToCenter * cos(thumbRadians);
+    final double thumbCenterX =
+        radius + thumbDistanceToCenter! * sin(thumbRadians!);
+    final double thumbCenterY =
+        radius + thumbDistanceToCenter! * cos(thumbRadians!);
 
     // build thumb widget
     Widget thumb = Positioned(
@@ -281,7 +286,7 @@ class _CircleColorPickerState extends State<CircleColorPicker> {
           width: thumbRadius * 2,
           height: thumbRadius * 2,
           decoration: BoxDecoration(
-              boxShadow:const <BoxShadow>[
+              boxShadow: <BoxShadow>[
                 BoxShadow(
                   color: _kThumbShadowColor,
                   spreadRadius: 2,
@@ -293,9 +298,9 @@ class _CircleColorPickerState extends State<CircleColorPicker> {
         ));
     return GestureDetector(
         behavior: HitTestBehavior.opaque,
-         onPanDown: (details) => handleTouch(details.globalPosition, context),
-         onPanStart: (details) => handleTouch(details.globalPosition, context),
-         onPanUpdate: (details) => handleTouch(details.globalPosition, context),
+        onPanDown: (details) => handleTouch(details.globalPosition, context),
+        onPanStart: (details) => handleTouch(details.globalPosition, context),
+        onPanUpdate: (details) => handleTouch(details.globalPosition, context),
         child: Stack(
           children: <Widget>[
             SizedBox(
@@ -319,15 +324,15 @@ class _CircleColorPickerState extends State<CircleColorPicker> {
 
   /// calculate colors picked from palette and update our states.
   void handleTouch(Offset globalPosition, BuildContext context) {
-    final box = context.findRenderObject() as RenderBox;
-    final localPosition = box.globalToLocal(globalPosition) ;
-    final  centerX = box.size.width / 2;
-    final centerY = box.size.height / 2;
-    final  deltaX = localPosition.dx - centerX;
-    final  deltaY = localPosition.dy - centerY;
-    final  distanceToCenter = sqrt(deltaX * deltaX + deltaY * deltaY);
-    var theta = atan2(deltaX, deltaY);
-    var degree = 270 - radiansToDegrees(theta);
+    RenderBox box = context.findRenderObject()as RenderBox;
+    Offset localPosition = box.globalToLocal(globalPosition);
+    final double centerX = box.size.width / 2;
+    final double centerY = box.size.height / 2;
+    final double deltaX = localPosition.dx - centerX;
+    final double deltaY = localPosition.dy - centerY;
+    final double distanceToCenter = sqrt(deltaX * deltaX + deltaY * deltaY);
+    double theta = atan2(deltaX, deltaY);
+    double degree = 270 - radiansToDegrees(theta);
     if (degree < 0) degree = 360 + degree;
     widget.colorListener(HSVColor.fromAHSV(1, degree, 1, 1).toColor().value);
     setState(() {

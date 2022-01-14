@@ -6,18 +6,18 @@ class BottomBarContainer extends StatelessWidget {
   final IconData icons;
 
   const BottomBarContainer(
-      {Key? key, required this.onTap, required this.icons, required this.colors})
+      {Key? key, required this.onTap, required  this.icons,required  this.colors})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return new Container(
       width: MediaQuery.of(context).size.width / 5,
       color: colors,
       child: Material(
         color: Colors.white,
         child: InkWell(
           onTap: () => onTap,
-          child:  Column(
+          child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -25,7 +25,7 @@ class BottomBarContainer extends StatelessWidget {
                 icons,
                 color: Colors.grey,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 4,
               ),
             ],

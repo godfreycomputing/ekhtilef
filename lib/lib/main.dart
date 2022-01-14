@@ -8,8 +8,14 @@ import 'service_locator.dart';
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences.setMockInitialValues({});
-  
+  final _appLanguage = AppConfigProvider();
+  // Init Language.
+  await _appLanguage.fetchLocale();
+  appConfig.initVersion();
+  setupInjection();
   runApp(
-    const App(),
+    App(
+      appLanguage: _appLanguage,
+    ),
   );
 }

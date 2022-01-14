@@ -28,19 +28,19 @@ class _EmojiesState extends State<Emojies> {
                 ],
               ),
             ),
-            const Divider(
+            Divider(
               height: 1,
             ),
-            const  SizedBox(
+            new SizedBox(
               height: 10,
             ),
-            SizedBox(
+            Container(
               height: 315,
               child: GridView(
                   shrinkWrap: true,
-                  physics: const ClampingScrollPhysics(),
+                  physics: ClampingScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       mainAxisSpacing: 0.0, maxCrossAxisExtent: 60.0),
                   children: emojis.map((String emoji) {
                     return GridTile(

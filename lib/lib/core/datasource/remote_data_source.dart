@@ -8,18 +8,18 @@ import '../errors/base_error.dart';
 import 'package:http_parser/http_parser.dart';
 
 abstract class RemoteDataSource {
- Future<Either<BaseError, TModel>?>requestUploadFile<TModel, TResponse,EModel>({
+ Future<Either<BaseError, TModel>?> requestUploadFile<TModel, TResponse,EModel>({
    required TResponse Function(dynamic) converter,
    required String url,
    required String fileKey,
    required String filePath,
-   required MediaType mediaType,
-   required Map<String, dynamic> data,
-   required ProgressCallback onSendProgress,
-   required ProgressCallback onReceiveProgress,
+   MediaType? mediaType,
+   Map<String, dynamic>? data,
+   ProgressCallback? onSendProgress,
+   ProgressCallback? onReceiveProgress,
    bool withAuthentication = false,
    bool withTenants = false,
-   required CancelToken cancelToken,
+   CancelToken? cancelToken,
  }) async {
    assert(converter != null);
    assert(url != null);
@@ -39,11 +39,11 @@ abstract class RemoteDataSource {
      fileKey: fileKey,
      filePath: filePath,
      fileName: filePath.substring(filePath.lastIndexOf('/') + 1),
-     mediaType: mediaType,
-     data: data,
+     mediaType: mediaType!,
+     data: data!,
      headers: headers,
-     onSendProgress: onSendProgress,
-     cancelToken: cancelToken, onReceiveProgress: (int count, int total) {  },
+     onSendProgress: onSendProgress!,
+     cancelToken: cancelToken!,
    );
 
    // convert jsonResponse to model and return it
@@ -65,10 +65,10 @@ abstract class RemoteDataSource {
     required TResponse Function(dynamic) converter,
     required HttpMethod method,
     required String url,
-    required Map<String, dynamic> queryParameters,
-    required Map<String, dynamic> body,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? body,
     bool withAuthentication = false,
-    required CancelToken cancelToken,
+    CancelToken? cancelToken,
   }) async {
     assert(converter != null);
     assert(method != null);
@@ -87,9 +87,9 @@ abstract class RemoteDataSource {
       method: method,
       url: url,
       headers: headers,
-      queryParameters: queryParameters ,
-      body: body,
-      cancelToken: cancelToken,
+      queryParameters: queryParameters ?? {},
+      body: body!,
+      cancelToken: cancelToken!,
     );
     // convert jsonResponse to model and return it
     var responseModel;

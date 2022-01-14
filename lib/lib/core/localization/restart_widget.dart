@@ -8,13 +8,14 @@
 import 'package:flutter/material.dart';
 
 class RestartWidget extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
 
-  const RestartWidget({required this.child});
+  RestartWidget({this.child});
 
-  // ignore: always_declare_return_types
   static restartApp(BuildContext context) {
-    
+    final State<StatefulWidget>? state =
+    context.findAncestorStateOfType();
+    state!.reassemble();
   }
 
   @override
@@ -25,7 +26,7 @@ class _RestartWidgetState extends State<RestartWidget> {
   Key key = UniqueKey();
 
   void restartApp() {
-    setState(() {
+    this.setState(() {
       key = UniqueKey();
     });
   }

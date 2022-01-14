@@ -49,7 +49,7 @@ dependencies:
 
 
   # STATE MANAGEMENT
-  provider: 6.0.0
+  provider: ^6.0.0
   get_it: ^7.2.0
 
   # SPLASH SCREEN, ONBOARD
@@ -134,7 +134,7 @@ dependencies:
   intro_slider: ^3.0.2
   #audio_manager: ^0.8.1
   flutter_calendar_carousel: 2.0.3
-  flutter_bloc: 7.2.0 #^6.0.6
+  flutter_bloc: 7.3.0 #^6.0.6
   # Service Locator
   #get_it: ^5.0.1
   # Functional programming in Dart

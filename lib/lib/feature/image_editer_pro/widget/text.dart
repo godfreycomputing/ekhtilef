@@ -12,15 +12,15 @@ class _TextEditorState extends State<TextEditor> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar:  AppBar(
+      appBar: new AppBar(
         backgroundColor: Colors.black,
         actions: <Widget>[
-           IconButton(
-              icon:const Icon(FontAwesomeIcons.alignLeft), onPressed: () {}),
-           IconButton(
-              icon:const Icon(FontAwesomeIcons.alignCenter), onPressed: () {}),
-           IconButton(
-              icon: const Icon(FontAwesomeIcons.alignRight), onPressed: () {}),
+          new IconButton(
+              icon: Icon(FontAwesomeIcons.alignLeft), onPressed: () {}),
+          new IconButton(
+              icon: Icon(FontAwesomeIcons.alignCenter), onPressed: () {}),
+          new IconButton(
+              icon: Icon(FontAwesomeIcons.alignRight), onPressed: () {}),
         ],
       ),
       body: Center(
@@ -30,15 +30,15 @@ class _TextEditorState extends State<TextEditor> {
             children: <Widget>[
               TextField(
                 controller: name,
-                decoration:const InputDecoration(
-                  hintText: 'Insert your message',
+                decoration: InputDecoration(
+                  hintText: "Insert your message",
                   hintStyle: TextStyle(color: Colors.white),
                   alignLabelWithHint: true,
                 ),
-                scrollPadding:const EdgeInsets.all(20.0),
+                scrollPadding: EdgeInsets.all(20.0),
                 keyboardType: TextInputType.multiline,
                 maxLines: 99999,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                 ),
                 autofocus: true,
@@ -47,19 +47,19 @@ class _TextEditorState extends State<TextEditor> {
           ),
         ),
       ),
-      bottomNavigationBar:  Container(
+      bottomNavigationBar: new Container(
         color: Colors.white,
-        padding:const EdgeInsets.all(10),
-        child:  FlatButton(
+        padding: EdgeInsets.all(10),
+        child: new FlatButton(
             onPressed: () {
               Navigator.pop(context, name.text);
             },
             color: Colors.black,
-            padding: const EdgeInsets.all(15),
+            padding: EdgeInsets.all(15),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: const Text(
-              'Add Text',
+            child: new Text(
+              "Add Text",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,

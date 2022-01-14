@@ -8,6 +8,7 @@ class Translations {
   final Locale locale;
 
   Translations(this.locale);
+
   static const LocalizationsDelegate<Translations> delegate =
   _AppLocalizationsDelegate();
   // Helper method to keep the code in the widgets concise
@@ -16,11 +17,11 @@ class Translations {
     return Localizations.of<Translations>(context, Translations);
   }
 
-  late Map<String, String> _localizedStrings;
+  Map<String, String>? _localizedStrings;
 
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
-    var jsonString =
+    String jsonString =
     await rootBundle.loadString('assets/locales/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     _localizedStrings = jsonMap.map((key, value) {
@@ -30,7 +31,7 @@ class Translations {
   }
   // This method will be called from every widget which needs a localized text
   String translate(String key) {
-    return _localizedStrings[key]??'$key not found';
+    return _localizedStrings![key]??"$key not found";
   }
 }
 
@@ -51,7 +52,7 @@ class _AppLocalizationsDelegate
   @override
   Future<Translations> load(Locale locale) async{
     // AppLocalizations class is where the JSON loading actually runs
-    var localizations = new Translations(locale);
+    Translations localizations = new Translations(locale);
     await localizations.load();
     return localizations;
   }

@@ -4,9 +4,9 @@ import '../constants.dart';
 
 class LanguageInterceptor extends Interceptor {
   @override
-  Future onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future onRequest(options, handler) async {
     // Get the language.
-    var  lang  = await appConfig.currentLanguage();
+    String lang  = await appConfig.currentLanguage();
     if (lang.isNotEmpty) {
       options.headers[HEADER_LANGUAGE] = lang;
       print(options.headers);
@@ -18,6 +18,6 @@ class LanguageInterceptor extends Interceptor {
 
 class AuthInterceptor extends Interceptor {
   @override
-  Future onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future onRequest(options, handler) async {
   }
 }
