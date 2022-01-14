@@ -1,2 +1,0 @@
-com/sameer/flutterstatusbarcolor/flutterstatusbarcolor/BuildConfig.java
- com.sameer.flutterstatusbarcolor.flutterstatusbarcolor.BuildConfig
