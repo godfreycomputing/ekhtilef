@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class BottomBarContainer extends StatelessWidget {
   final Color colors;
-  final Function onTap;
+  final VoidCallback onTap;
   final IconData icons;
 
   const BottomBarContainer(
@@ -10,14 +10,14 @@ class BottomBarContainer extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return  Container(
       width: MediaQuery.of(context).size.width / 5,
       color: colors,
       child: Material(
         color: Colors.white,
         child: InkWell(
-          onTap: () => onTap,
-          child: new Column(
+          onTap: onTap,
+          child:  Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -25,7 +25,7 @@ class BottomBarContainer extends StatelessWidget {
                 icons,
                 color: Colors.grey,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
             ],

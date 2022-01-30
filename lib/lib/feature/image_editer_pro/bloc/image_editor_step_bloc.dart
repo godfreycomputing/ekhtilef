@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 
 part 'image_editor_step_event.dart';
@@ -12,13 +11,14 @@ part 'image_editor_step_state.dart';
 
 class ImageEditorStepBloc
     extends Bloc<ImageEditorStepEvent, ImageEditorStepState> {
-  ImageEditorStepBloc() : super(ImageEditorFirstStepInitialAddImageState());
+  ImageEditorStepBloc() : super(const ImageEditorFirstStepInitialAddImageState());
 
   List<File> listOfEditingImage= [];
-  List<int> _height = [];
-  List<int> _width = [];
+  final List<int> _height = [];
+  final List<int> _width = [];
   int counter = 1;
   
+  @override
   Stream<ImageEditorStepState> mapEventToState(
     ImageEditorStepEvent event,
   ) async* {
