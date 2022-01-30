@@ -545,7 +545,7 @@ mixin ProductAddonsMixin {
       final urls = <String?>[];
       for (var file in result!.files) {
         await Services().api.uploadImage({
-          'title': {'rendered': path.basename(file.path)},
+          'title': {'rendered': path.basename(file.path!)},
           'media_attachment': base64.encode(file.bytes!)
         }, userModel.user != null ? userModel.user!.cookie : null)!.then(
             (photo) {
