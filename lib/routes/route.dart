@@ -43,7 +43,7 @@ class Routes {
     RouteList.language: (context) => LanguageScreen(),
     RouteList.currencies: (context) => CurrenciesScreen(),
     RouteList.category: (context) => const CategoriesScreen(),
-    RouteList.tshirt: (context) => TShirtEditor(path: '',),
+    RouteList.tshirt: (context) => const TShirtEditor(path: ""),
     RouteList.audioPlaylist: (context) =>
         Services().renderAudioPlaylistScreen(),
     // AudioPlaylistScreen(audioService: injector.get()),

@@ -19,8 +19,8 @@ class Gaps {
   static Widget vGap12 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp12));
   static Widget vGap15 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp15));
   static Widget vGap16 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp16));
-  static Widget vGap24 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp4));
-  static Widget vGap32 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp24));
+  static Widget vGap24 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp24));
+  static Widget vGap32 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp32));
   static Widget vGap50 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp50));
   static Widget vGap64 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp64));
   static Widget vGap128 = SizedBox(height: ScreenUtil().setWidth(Dimens.dp128));

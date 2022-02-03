@@ -13,12 +13,13 @@ class ImageEditorFirstStepInitialAddImageState extends ImageEditorStepState {
 }
 
 class InsertImageState extends ImageEditorStepState {
-  final File baseImage;
+  final File baseImage ; 
   final int height;
   final int width;
-
+  
+  
   const InsertImageState({
-    required this.baseImage,
+    required this.baseImage ,
     required this.height,
     required this.width,
   });
@@ -111,4 +112,10 @@ class StickerImageState extends ImageEditorStepState{
     height,
     width,
   ];
+}
+class ZokomInitialState extends ImageEditorStepState{
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+  
 }

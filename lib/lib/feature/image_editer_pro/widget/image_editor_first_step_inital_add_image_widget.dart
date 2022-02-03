@@ -1,54 +1,69 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../../core/common/app_colors.dart';
-import '../../../core/common/dimens.dart';
-import '../../../core/common/gaps.dart';
+import '../../../core/tools/tools.dart';
 import '../bloc/image_editor_step_bloc.dart';
-import '../providers/image_converter_provider.dart';
+import '../screen/image_editor_pro.dart';
 
-class ImageEditorFirstStepInitialAddImageWidget extends StatelessWidget {
+
+class ImageEditorFirstStepInitialAddImageWidget extends StatefulWidget {
   final ImageEditorStepBloc imageEditorStepBloc;
   final String path;
 
   const ImageEditorFirstStepInitialAddImageWidget(
-      {Key? key, required this.imageEditorStepBloc, required this.path});
+      {Key? key, required this.imageEditorStepBloc,required  this.path})
+      : super(key: key);
+  @override
+  _ImageEditorFirstStepInitialAddImageWidgetState createState() =>
+      _ImageEditorFirstStepInitialAddImageWidgetState();
+}
+
+class _ImageEditorFirstStepInitialAddImageWidgetState
+    extends State<ImageEditorFirstStepInitialAddImageWidget> {
+  //late ImageEditorUtils utils;
+
+  late final ImageEditorStepBloc imageEditorStepBloc;
+
+  void chargeImage(ImageEditorStepEvent Function(
+      File baseImage,
+      int height,
+      int width
+      ) event, ImageEditorStepBloc imageEditorStepBloc, String s) async {
+        if(s != ''){
+      print('STARTED $s');
+      await Tools.urlToFile(s)
+          .then((pickedFile) async {
+        var decodedImage =
+            await decodeImageFromList(pickedFile.readAsBytesSync());
+        imageEditorStepBloc.add(event(
+          pickedFile,
+          decodedImage.height,
+          decodedImage.width,
+        ));
+        await Navigator.of(context).push(CupertinoPageRoute<void>(
+          builder: (BuildContext context) =>  TShirtEditor(path: s)
+          ),
+        );
+        print('DONEEE');
+      });}
+    }
+  @override
+  void initState() {
+        chargeImage((image, height, width) =>
+                AddImageEvent(
+                  baseImage: image,
+                  height: height,
+                  width: width,
+                ), widget.imageEditorStepBloc, widget.path);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final imageConverter =
-        Provider.of<ImageConverterProvider>(context, listen: false);
-    final imageConverterWatch = Provider.of<ImageConverterProvider>(context);
-    final downloadedImage = imageConverterWatch.convertedImage;
-    final imageLoading = imageConverterWatch.imageLoading;
-    return InkWell(
-      onTap: () => imageConverter.urlToImage(path),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.add_a_photo_outlined,
-              color: AppColors.primaryColorDark,
-              size: MediaQuery.of(context).size.width / 3,
-            ),
-            Gaps.vGap32,
-            const Text(
-              'Tap anywhere to open a photo',
-              style: TextStyle(
-                  color: AppColors.primaryColorDark,
-                  fontWeight: FontWeight.bold,
-                  fontSize: Dimens.font_sp24),
-            ),
-            imageLoading
-                ? const CircularProgressIndicator()
-                : Image(image: downloadedImage.image),
-          ],
-        ),
-      ),
-    );
+    return const Scaffold(body: Center(
+      child: CircularProgressIndicator(),
+    ));
+    
   }
 }

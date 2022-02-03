@@ -96,3 +96,8 @@ class SaveImageInGallery extends ImageEditorStepEvent {
   @override
   List<Object> get props => [];
 }
+class ZokomInitialEvent extends ImageEditorStepEvent {
+  @override
+  List<Object?> get props => [];
+  
+}

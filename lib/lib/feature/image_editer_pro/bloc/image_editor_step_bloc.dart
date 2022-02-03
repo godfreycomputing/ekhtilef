@@ -11,14 +11,13 @@ part 'image_editor_step_state.dart';
 
 class ImageEditorStepBloc
     extends Bloc<ImageEditorStepEvent, ImageEditorStepState> {
-  ImageEditorStepBloc() : super(const ImageEditorFirstStepInitialAddImageState());
+  ImageEditorStepBloc() : super(ImageEditorFirstStepInitialAddImageState());
 
   List<File> listOfEditingImage= [];
-  final List<int> _height = [];
-  final List<int> _width = [];
-  int counter = 1;
+  List<int> _height = [];
+  List<int> _width = [];
+  //int counter = 1;
   
-  @override
   Stream<ImageEditorStepState> mapEventToState(
     ImageEditorStepEvent event,
   ) async* {
@@ -39,6 +38,7 @@ class ImageEditorStepBloc
       );
     }
     else if(event is SaveImageInGallery){
+    //  print('-------${listOfEditingImage}');
       await GallerySaver.saveImage(
           listOfEditingImage.last.path,
           albumName: "TShirt"

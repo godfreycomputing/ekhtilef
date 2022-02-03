@@ -2,17 +2,14 @@ import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart' as html;
-import 'package:fstore/lib/app.dart';
-import 'package:fstore/lib/core/common/appConfig.dart';
-import 'package:fstore/lib/core/localization/localization_provider.dart';
-import 'package:fstore/lib/feature/image_editer_pro/screen/image_editor_pro.dart';
-import 'package:fstore/lib/service_locator.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
 import '../common/config.dart';
 import '../common/constants.dart';
 import '../generated/l10n.dart';
+import '../lib/feature/image_editer_pro/bloc/image_editor_step_bloc.dart';
+import '../lib/feature/image_editer_pro/widget/image_editor_first_step_inital_add_image_widget.dart';
 import '../models/index.dart'
     show CartModel, Product, ProductModel, ProductVariation;
 import '../screens/cart/cart_screen.dart';
@@ -339,11 +336,12 @@ mixin ProductVariantMixin {
           onTap: () async {
             //img
             
+  final _imageEditorStepBloc = ImageEditorStepBloc();
             await Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                         TShirtEditor(path: product.imageFeature!)
+                         ImageEditorFirstStepInitialAddImageWidget(path: product.imageFeature!, imageEditorStepBloc:_imageEditorStepBloc ,)
                         ));
           }, //isAvailable ? () => addToCart(true, inStock) : null,
           child: buyOrOutOfStockButton,

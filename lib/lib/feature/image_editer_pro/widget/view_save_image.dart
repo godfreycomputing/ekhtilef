@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:screenshot/screenshot.dart';
-import '../bloc/image_editor_step_bloc.dart';
+import 'package:fstore/lib/feature/image_editer_pro/bloc/image_editor_step_bloc.dart';
 import 'box_image_clipper.dart';
 
 class ImageView extends StatefulWidget {
@@ -40,7 +40,7 @@ class _ImageViewState extends State<ImageView> {
             children: [
               Screenshot(
                 controller: screenshotBoxController,
-                //containerKey: _containerKey,
+                key: _containerKey,
                 child: ClipPath(
                   key: _containerKey,
                   clipper: BoxImageClipper(
